@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ana-document-ai.backend</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/harby/0_workspace/PEERNINE/Plot_Code/Ana_test_DocumentAI/start_backend.sh</string>
+    </array>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/harby/0_workspace/PEERNINE/Plot_Code/Ana_test_DocumentAI/backend</string>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/harby/0_workspace/PEERNINE/Plot_Code/Ana_test_DocumentAI/backend/logs/backend.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/harby/0_workspace/PEERNINE/Plot_Code/Ana_test_DocumentAI/backend/logs/backend.error.log</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>RestartType</key>
+    <string>Always</string>
+    
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+</dict>
+</plist>

@@ -1,0 +1,11 @@
+# Google Cloud 설정
+GOOGLE_CLOUD_PROJECT_ID=your-project-id-here
+GOOGLE_CLOUD_LOCATION=us
+DOCUMENT_AI_PROCESSOR_ID=your-processor-id-here
+
+# Google Cloud 인증 (서비스 계정 키 파일 경로)
+GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
+
+# Document AI 설정
+DOCUMENT_AI_ENDPOINT=https://us-documentai.googleapis.com
+
