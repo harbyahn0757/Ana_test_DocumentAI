@@ -48,15 +48,14 @@ start() {
     
     echo "포트 9001이 정리되었습니다. 서버 시작 중..."
     
-    # 6. 백엔드 서버 시작
+    # 6. 백엔드 서버 시작 (실시간 로그 출력)
     cd "$BACKEND_DIR"
-    nohup "$VENV_DIR/bin/python" -m uvicorn app.main:app --host 0.0.0.0 --port 9001 --reload > "$LOG_FILE" 2> "$ERROR_LOG" &
+    echo "백엔드 서버 시작 중... (실시간 로그 출력)"
+    echo "종료하려면 Ctrl+C를 누르세요"
+    echo "----------------------------------------"
     
-    # 7. PID 저장
-    echo $! > "$PID_FILE"
-    echo "백엔드 서버가 시작되었습니다 (PID: $!)"
-    echo "로그: $LOG_FILE"
-    echo "에러 로그: $ERROR_LOG"
+    # 실시간 로그와 함께 서버 시작
+    "$VENV_DIR/bin/python" -m uvicorn app.main:app --host 0.0.0.0 --port 9001 --reload
     
     # 8. 시작 확인
     sleep 3
