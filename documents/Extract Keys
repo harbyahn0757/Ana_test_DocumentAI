@@ -1,0 +1,1314 @@
+{
+  "pageInfo": {
+    "title": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range-stringbuffer",
+      "delimiter": ""
+    },
+    "options": {
+      "useOcrYN": "N",
+      "useOcrPages": [],
+      "shapeAnalysisYN": "N"
+    }
+  },
+  "mergeInfo": {
+    "stampInfo": {},
+    "doctorInfo": {},
+    "extraPageInfo": [],
+    "mainBackgroundInfo": null,
+    "titleBackgroundInfo": null
+  },
+  "extractInfo": {
+    "chartNo": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "name": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gender": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "birthday": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "age": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "phoneNo": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "email": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "zipcode": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "address1": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "address2": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "checkupDate": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "visitDate": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "decisionDate": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "height": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "weight": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bmi": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "waist": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpHigh": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpHighRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpHighResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpLwst": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpLwstRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bpLwstResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hmg": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hmgRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hmgResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "blds": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bldsRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "bldsResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "totChole": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "totCholeRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "totCholeResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hdlChole": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hdlCholeRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "hdlCholeResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "triglyceride": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "triglycerideRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "triglycerideResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "ldlChole": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "ldlCholeRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "ldlCholeResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "creatinine": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "creatinineRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "creatinineResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gfr": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gfrRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gfrResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgotAst": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgotAstRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgotAstResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgptAlt": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgptAltRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "sgptAltResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gammaGtp": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gammaGtpRef": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "gammaGtpResult": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "oligProteCd": {
+      "page": 1,
+      "type": "string",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "method": "range",
+      "delimiter": "",
+      "regex": "",
+      "content": "",
+      "threshold": "",
+      "changer": null,
+      "eraser": null,
+      "parseInt": false,
+      "dateParser": null,
+      "useOcrYN": "N"
+    },
+    "cancers": {
+      "extractor": {
+        "docNm": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "testItem": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "decision": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "recommendations": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "checkupDate": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "visitDate": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        },
+        "decisionDate": {
+          "page": 1,
+          "type": "string",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "method": "range",
+          "delimiter": "",
+          "regex": "",
+          "content": "",
+          "threshold": "",
+          "changer": null,
+          "eraser": null,
+          "parseInt": false,
+          "dateParser": null,
+          "useOcrYN": "N"
+        }
+      }
+    }
+  }
+}
