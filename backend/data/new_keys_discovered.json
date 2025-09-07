@@ -1,0 +1,272 @@
+{
+  "discovered_keys": [
+    {
+      "key_name": "주민등록번호",
+      "anchor_text": "주민등록번호",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852142",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "사원번호",
+      "anchor_text": "사원번호",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852149",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "근로자주소",
+      "anchor_text": "근로자주소",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852150",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "전화번호",
+      "anchor_text": "전화번호",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852151",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "사업체명",
+      "anchor_text": "사업체명",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852152",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "업종",
+      "anchor_text": "업종",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852153",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "현작업부서",
+      "anchor_text": "현작업부서",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852154",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "현작업내용",
+      "anchor_text": "현작업내용",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852154",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "입사년월일",
+      "anchor_text": "입사년월일",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852155",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "현직전입일",
+      "anchor_text": "현직전입일",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852156",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "폭로기간",
+      "anchor_text": "폭로기간",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852157",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "1일폭로시간",
+      "anchor_text": "1일폭로시간",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852157",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "과거직력",
+      "anchor_text": "과거직력",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852158",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "작업공정명",
+      "anchor_text": "작업공정명",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852159",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "근무년수",
+      "anchor_text": "근무년수",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852160",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "기간",
+      "anchor_text": "기간",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852160",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "문진",
+      "anchor_text": "문진",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852161",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "과거병력",
+      "anchor_text": "과거병력",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852162",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "가족력",
+      "anchor_text": "가족력",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852162",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "업무기인성",
+      "anchor_text": "업무기인성",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852163",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "현재증상",
+      "anchor_text": "현재증상",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852164",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "치과소견",
+      "anchor_text": "치과소견",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852165",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "취급물질",
+      "anchor_text": "취급물질",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852165",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "건강관리구분",
+      "anchor_text": "건강관리구분",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852166",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "건강관리구분 내용",
+      "anchor_text": "건강관리구분 내용",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852167",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "평가구분",
+      "anchor_text": "평가구분",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852168",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "업무수행적합여부평가기준",
+      "anchor_text": "업무수행적합여부평가기준",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852168",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "판정",
+      "anchor_text": "판정",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852169",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "유해인자",
+      "anchor_text": "유해인자",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852170",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "소견/조치",
+      "anchor_text": "소견/조치",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852171",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "사후관리소견",
+      "anchor_text": "사후관리소견",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852171",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "표적장기명",
+      "anchor_text": "표적장기명",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852172",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "검사결과",
+      "anchor_text": "검사결과",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852173",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "정상치",
+      "anchor_text": "정상치",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852173",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "전년도 검사결과",
+      "anchor_text": "전년도 검사결과",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852174",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "전전년도 검사결과",
+      "anchor_text": "전전년도 검사결과",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852175",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "기본검사",
+      "anchor_text": "기본검사",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852176",
+      "file_path": "documents/example"
+    },
+    {
+      "key_name": "체질량지수(BMI)",
+      "anchor_text": "체질량지수(BMI)",
+      "category": "special",
+      "discovered_at": "2025-09-07T23:22:52.852176",
+      "file_path": "documents/example"
+    }
+  ],
+  "last_updated": "2025-09-07T23:22:52.852177",
+  "total_discovered": 40
+}

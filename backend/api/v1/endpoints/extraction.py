@@ -17,6 +17,113 @@ logger = get_logger(__name__)
 router = APIRouter(tags=["extraction"])
 
 
+@router.get("/new-keys")
+async def get_new_keys(
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
+    """
+    새로 발견된 키 목록 조회
+    """
+    try:
+        import json
+        import os
+        
+        # 새 키 저장 파일 경로
+        new_keys_file = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data', 'new_keys_discovered.json')
+        
+        if os.path.exists(new_keys_file):
+            with open(new_keys_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        else:
+            data = {
+                "discovered_keys": [],
+                "last_updated": None,
+                "total_discovered": 0
+            }
+        
+        return JSONResponse(
+            status_code=200,
+            content={
+                "success": True,
+                "data": data
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"새 키 목록 조회 실패: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": f"새 키 목록 조회 실패: {str(e)}"
+            }
+        )
+
+@router.post("/recognize-keys")
+async def recognize_keys(
+    file: UploadFile = File(...),
+    processor_type: str = Form("pdfplumber"),
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
+    """
+    키 인식 API
+    PDF 파일에서 앵커 텍스트를 기반으로 키를 자동 인식합니다.
+    
+    Args:
+        file: 업로드된 PDF 파일
+        processor_type: PDF 처리기 타입 (pdfplumber, camelot, tabula)
+        
+    Returns:
+        JSONResponse: 인식된 키 정보
+    """
+    try:
+        import json
+        import tempfile
+        import os
+        
+        # 파일 저장
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            temp_file_path = temp_file.name
+        
+        try:
+            # 추출 서비스 인스턴스 생성
+            extraction_service = ExtractionService()
+            
+            # 키 인식 수행
+            recognition_results = await extraction_service.recognize_keys(
+                file_path=temp_file_path,
+                processor_type=processor_type
+            )
+            
+            logger.info(f"키 인식 완료: {len(recognition_results.get('recognized_keys', []))}개 키 발견")
+            
+            return JSONResponse(
+                status_code=200,
+                content={
+                    "success": True,
+                    "message": "키 인식이 완료되었습니다",
+                    "data": recognition_results
+                }
+            )
+            
+        finally:
+            # 임시 파일 삭제
+            if os.path.exists(temp_file_path):
+                os.unlink(temp_file_path)
+                
+    except Exception as e:
+        logger.error(f"키 인식 실패: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": f"키 인식 중 오류가 발생했습니다: {str(e)}"
+            }
+        )
+
+
 @router.post("/extract")
 async def extract_data(
     file: UploadFile = File(...),
