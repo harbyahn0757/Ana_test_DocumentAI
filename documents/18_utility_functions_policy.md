@@ -372,3 +372,499 @@ def pdf_basic_info(path: Path) -> dict:
 ---
 
 이 정책을 통해 코드의 재사용성을 높이고 유지보수 비용을 절감할 수 있습니다.
+
+---
+
+## 🎯 프론트엔드 커스텀 훅 정책 (2024.01.25 업데이트)
+
+### 📋 개요
+React 프론트엔드에서 커스텀 훅의 작성, 구성, 재사용에 대한 정책을 정의합니다.
+상태 로직의 재사용성을 높이고 컴포넌트의 복잡성을 줄이기 위한 표준을 제시합니다.
+
+### 🎯 커스텀 훅 정의 기준
+
+#### 1. 커스텀 훅으로 분리해야 하는 경우
+
+##### ✅ **필수 분리 조건**
+- **2개 이상의 컴포넌트에서 동일한 상태 로직이 사용되는 경우**
+- **50줄 이상의 독립적인 상태 관리 로직**
+- **복잡한 상태 업데이트나 사이드 이펙트**
+- **API 호출과 상태 관리가 결합된 로직**
+
+##### ✅ **권장 분리 조건**
+- **테스트가 필요한 독립적인 상태 로직**
+- **재사용 가능성이 높은 비즈니스 로직**
+- **복잡한 폼 상태 관리**
+- **외부 라이브러리와의 통합 로직**
+
+#### 2. 커스텀 훅 배치 기준
+
+```
+frontend/src/
+├── shared/hooks/                    # 전역 공통 훅
+│   ├── useApi.js                   # API 호출 관련 훅
+│   ├── useLocalStorage.js          # 로컬 스토리지 훅
+│   ├── useDebounce.js              # 디바운스 훅
+│   └── useNotification.js          # 알림 관련 훅
+├── features/                       # 기능별 훅
+│   ├── data_extraction/
+│   │   └── hooks/
+│   │       ├── useAnalysis.js      # 분석 관련 훅
+│   │       ├── useFileManagement.js # 파일 관리 훅
+│   │       └── useCellMapping.js   # 셀 매핑 훅
+│   └── template_management/
+│       └── hooks/
+│           ├── useTemplateManagement.js # 템플릿 관리 훅
+│           └── useQuickTest.js     # 빠른 테스트 훅
+└── pages/                          # 페이지별 훅
+    ├── DataExtractionPage.js       # 페이지 컴포넌트
+    └── ExtractionTestPage.js       # 페이지 컴포넌트
+```
+
+### 🔧 커스텀 훅 작성 규칙
+
+#### 1. 훅 네이밍 규칙
+
+```javascript
+// ✅ use 접두사 + 기능명 (camelCase)
+export const useTemplateManagement = () => { /* ... */ };
+export const useCellMapping = () => { /* ... */ };
+export const useQuickTest = () => { /* ... */ };
+
+// ✅ 매개변수는 객체로 받기
+export const useCellMapping = ({ showSuccess, showError, showInfo }) => {
+  // 훅 로직
+};
+
+// ✅ 반환값은 객체로 제공
+return {
+  // 상태
+  anchorCell,
+  valueCell,
+  keyMappings,
+  // 함수
+  handleCellClick,
+  handleSaveMapping,
+  handleDeleteMapping
+};
+```
+
+#### 2. 상태 관리 패턴
+
+```javascript
+// ✅ useState로 로컬 상태 관리
+export const useTemplateManagement = ({ showSuccess, showError, showInfo }) => {
+  // 기본 상태
+  const [savedTemplates, setSavedTemplates] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [templateMode, setTemplateMode] = useState('new');
+  
+  // 로딩 상태
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // 에러 상태
+  const [error, setError] = useState(null);
+  
+  return {
+    savedTemplates,
+    selectedTemplate,
+    templateMode,
+    isLoading,
+    error,
+    // ... 함수들
+  };
+};
+```
+
+#### 3. 사이드 이펙트 관리
+
+```javascript
+// ✅ useEffect로 사이드 이펙트 관리
+export const useTemplateManagement = ({ showSuccess, showError, showInfo }) => {
+  const [savedTemplates, setSavedTemplates] = useState([]);
+  
+  // 컴포넌트 마운트 시 템플릿 로드
+  useEffect(() => {
+    loadTemplates();
+  }, []);
+  
+  // 템플릿 변경 시 자동 저장
+  useEffect(() => {
+    if (selectedTemplate) {
+      saveTemplateToStorage(selectedTemplate);
+    }
+  }, [selectedTemplate]);
+  
+  const loadTemplates = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const templates = await templateApiService.getTemplates();
+      setSavedTemplates(templates);
+    } catch (error) {
+      setError(error.message);
+      showError('템플릿 로드 실패');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [showError]);
+  
+  return { savedTemplates, loadTemplates, isLoading, error };
+};
+```
+
+#### 4. 이벤트 핸들러 패턴
+
+```javascript
+// ✅ useCallback으로 함수 메모이제이션
+export const useCellMapping = ({ showSuccess, showError, showInfo }) => {
+  const [anchorCell, setAnchorCell] = useState(null);
+  const [valueCell, setValueCell] = useState(null);
+  
+  // 셀 클릭 핸들러
+  const handleCellClick = useCallback((rowIndex, colIndex, cellValue, tableData) => {
+    if (!anchorCell) {
+      // 앵커 설정
+      setAnchorCell({ row: rowIndex, col: colIndex, content: cellValue });
+      showInfo(`앵커 설정: "${cellValue}" (${rowIndex}, ${colIndex})`);
+    } else {
+      // 값 설정
+      setValueCell({ row: rowIndex, col: colIndex, content: cellValue });
+      const rowDiff = rowIndex - anchorCell.row;
+      const colDiff = colIndex - anchorCell.col;
+      showSuccess(`값 설정: "${cellValue}" - 상대위치: (${rowDiff}, ${colDiff})`);
+    }
+  }, [anchorCell, showInfo, showSuccess]);
+  
+  // 앵커/값 리셋 핸들러
+  const handleAnchorValueReset = useCallback(() => {
+    setAnchorCell(null);
+    setValueCell(null);
+    showInfo('앵커/값 설정이 초기화되었습니다');
+  }, [showInfo]);
+  
+  return {
+    anchorCell,
+    valueCell,
+    handleCellClick,
+    handleAnchorValueReset
+  };
+};
+```
+
+### 📚 도메인별 훅 가이드
+
+#### 1. 데이터 관리 훅 (useTemplateManagement)
+
+```javascript
+// ✅ 템플릿 관리 로직 (527줄)
+export const useTemplateManagement = ({ showSuccess, showError, showInfo }) => {
+  // 상태 관리
+  const [savedTemplates, setSavedTemplates] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const [templateMode, setTemplateMode] = useState('new');
+  
+  // API 호출 함수
+  const loadTemplates = useCallback(async () => {
+    try {
+      const templates = await templateApiService.getTemplates();
+      setSavedTemplates(templates);
+    } catch (error) {
+      showError('템플릿 로드 실패');
+    }
+  }, [showError]);
+  
+  const handleSaveTemplate = useCallback(async (templateData) => {
+    try {
+      const savedTemplate = await templateApiService.saveTemplate(templateData);
+      setSavedTemplates(prev => [...prev, savedTemplate]);
+      showSuccess('템플릿이 저장되었습니다');
+    } catch (error) {
+      showError('템플릿 저장 실패');
+    }
+  }, [showSuccess, showError]);
+  
+  return {
+    savedTemplates,
+    selectedTemplate,
+    templateMode,
+    loadTemplates,
+    handleSaveTemplate
+  };
+};
+```
+
+#### 2. UI 상태 관리 훅 (useCellMapping)
+
+```javascript
+// ✅ 셀 매핑 로직 (306줄)
+export const useCellMapping = ({ showSuccess, showError, showInfo }) => {
+  // 상태 관리
+  const [anchorCell, setAnchorCell] = useState(null);
+  const [valueCell, setValueCell] = useState(null);
+  const [keyMappings, setKeyMappings] = useState([]);
+  
+  // 상태 변경 감지
+  useEffect(() => {
+    if (anchorCell && valueCell) {
+      const rowDiff = valueCell.row - anchorCell.row;
+      const colDiff = valueCell.col - anchorCell.col;
+      setRelativePosition({ row: rowDiff, col: colDiff });
+    }
+  }, [anchorCell, valueCell]);
+  
+  // 매핑 저장
+  const handleSaveMapping = useCallback((mappingData) => {
+    const newMapping = {
+      id: Date.now().toString(),
+      ...mappingData,
+      createdAt: new Date().toISOString()
+    };
+    setKeyMappings(prev => [...prev, newMapping]);
+    showSuccess('매핑이 저장되었습니다');
+  }, [showSuccess]);
+  
+  return {
+    anchorCell,
+    valueCell,
+    keyMappings,
+    handleCellClick,
+    handleSaveMapping
+  };
+};
+```
+
+#### 3. API 통신 훅 (useQuickTest)
+
+```javascript
+// ✅ 빠른 테스트 로직 (93줄)
+export const useQuickTest = ({ showSuccess, showError }) => {
+  const [quickTestResults, setQuickTestResults] = useState(null);
+  const [isQuickTestLoading, setIsQuickTestLoading] = useState(false);
+  
+  const executeQuickTest = useCallback(async (testData) => {
+    try {
+      setIsQuickTestLoading(true);
+      const results = await quickTestApiService.executeTest(testData);
+      setQuickTestResults(results);
+      showSuccess('빠른 테스트가 완료되었습니다');
+    } catch (error) {
+      showError('빠른 테스트 실행 실패');
+    } finally {
+      setIsQuickTestLoading(false);
+    }
+  }, [showSuccess, showError]);
+  
+  return {
+    quickTestResults,
+    isQuickTestLoading,
+    executeQuickTest
+  };
+};
+```
+
+### 🧪 훅 테스트 정책
+
+#### 1. 훅 테스트 필수
+
+```javascript
+// tests/hooks/useTemplateManagement.test.js
+import { renderHook, act } from '@testing-library/react-hooks';
+import { useTemplateManagement } from '../shared/hooks/useTemplateManagement';
+
+describe('useTemplateManagement', () => {
+  it('should load templates on mount', async () => {
+    const { result } = renderHook(() => useTemplateManagement({
+      showSuccess: jest.fn(),
+      showError: jest.fn(),
+      showInfo: jest.fn()
+    }));
+    
+    await act(async () => {
+      await result.current.loadTemplates();
+    });
+    
+    expect(result.current.savedTemplates).toHaveLength(2);
+  });
+  
+  it('should save template successfully', async () => {
+    const { result } = renderHook(() => useTemplateManagement({
+      showSuccess: jest.fn(),
+      showError: jest.fn(),
+      showInfo: jest.fn()
+    }));
+    
+    const templateData = { name: 'Test Template', mappings: [] };
+    
+    await act(async () => {
+      await result.current.handleSaveTemplate(templateData);
+    });
+    
+    expect(result.current.savedTemplates).toContainEqual(
+      expect.objectContaining({ name: 'Test Template' })
+    );
+  });
+});
+```
+
+### 📖 훅 문서화 규칙
+
+#### 1. JSDoc 표준
+
+```javascript
+/**
+ * 셀 클릭 및 매핑 관리를 위한 커스텀 훅
+ * 
+ * @param {Object} options - 훅 옵션
+ * @param {Function} options.showSuccess - 성공 메시지 표시 함수
+ * @param {Function} options.showError - 에러 메시지 표시 함수
+ * @param {Function} options.showInfo - 정보 메시지 표시 함수
+ * @param {Function} options.setPendingPageValidation - 페이지 검증 대기 상태 설정 함수
+ * @param {Function} options.setActivePageTab - 활성 페이지 탭 설정 함수
+ * @returns {Object} 훅 반환값
+ * @returns {Object|null} returns.anchorCell - 앵커 셀 정보
+ * @returns {Object|null} returns.valueCell - 값 셀 정보
+ * @returns {Array} returns.keyMappings - 키 매핑 목록
+ * @returns {Function} returns.handleCellClick - 셀 클릭 핸들러
+ * @returns {Function} returns.handleSaveMapping - 매핑 저장 핸들러
+ * 
+ * @example
+ * ```javascript
+ * const {
+ *   anchorCell,
+ *   valueCell,
+ *   keyMappings,
+ *   handleCellClick,
+ *   handleSaveMapping
+ * } = useCellMapping({
+ *   showSuccess,
+ *   showError,
+ *   showInfo,
+ *   setPendingPageValidation,
+ *   setActivePageTab
+ * });
+ * ```
+ */
+export const useCellMapping = ({ showSuccess, showError, showInfo, setPendingPageValidation, setActivePageTab }) => {
+  // 훅 구현
+};
+```
+
+### 🔄 훅 리팩터링 가이드
+
+#### 1. 기존 컴포넌트에서 훅 추출
+
+```javascript
+// ❌ 중복 로직 (리팩터링 전)
+const ComponentA = () => {
+  const [templates, setTemplates] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  const loadTemplates = async () => {
+    setLoading(true);
+    try {
+      const data = await api.getTemplates();
+      setTemplates(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // ... 컴포넌트 로직
+};
+
+const ComponentB = () => {
+  const [templates, setTemplates] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  const loadTemplates = async () => {
+    setLoading(true);
+    try {
+      const data = await api.getTemplates();
+      setTemplates(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // ... 동일한 로직
+};
+
+// ✅ 공통 훅으로 추출 (리팩터링 후)
+export const useTemplateManagement = ({ showSuccess, showError }) => {
+  const [savedTemplates, setSavedTemplates] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const loadTemplates = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const templates = await templateApiService.getTemplates();
+      setSavedTemplates(templates);
+    } catch (error) {
+      showError('템플릿 로드 실패');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [showError]);
+  
+  return { savedTemplates, isLoading, loadTemplates };
+};
+
+const ComponentA = () => {
+  const { savedTemplates, isLoading, loadTemplates } = useTemplateManagement({
+    showSuccess,
+    showError
+  });
+  
+  // ... 컴포넌트 로직
+};
+
+const ComponentB = () => {
+  const { savedTemplates, isLoading, loadTemplates } = useTemplateManagement({
+    showSuccess,
+    showError
+  });
+  
+  // ... 컴포넌트 로직
+};
+```
+
+### 📊 현재 적용 현황
+
+#### ✅ 구현 완료된 훅
+
+1. **useTemplateManagement** (527줄)
+   - 템플릿 저장/로드/삭제 로직
+   - API 통신 및 에러 처리
+   - 상태 관리 및 사이드 이펙트
+
+2. **useCellMapping** (306줄)
+   - 셀 클릭 및 앵커/값 설정
+   - 키 매핑 관리
+   - 페이지 간 상태 동기화
+
+3. **useQuickTest** (93줄)
+   - 빠른 테스트 실행
+   - 결과 관리 및 로딩 상태
+
+4. **useAnalysis** (66줄)
+   - PDF 분석 관련 로직
+   - 분석 상태 관리
+
+5. **useFileManagement**
+   - 파일 업로드/관리 로직
+   - 파일 상태 관리
+
+#### 📈 개선 효과
+
+- **코드 중복 제거**: 약 1,000줄의 중복 로직 제거
+- **재사용성 향상**: 5개 훅으로 다양한 컴포넌트에서 활용
+- **테스트 용이성**: 각 훅을 독립적으로 테스트 가능
+- **유지보수성**: 단일 책임 원칙 적용으로 수정 범위 최소화
+
+---
+
+이 정책을 통해 React 애플리케이션의 상태 로직을 효과적으로 관리하고 재사용성을 높일 수 있습니다.

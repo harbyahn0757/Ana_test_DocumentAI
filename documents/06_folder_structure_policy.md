@@ -316,3 +316,190 @@ UI Layer (컴포넌트) → Logic Layer (훅/서비스) → Data Layer (API/스�
 - [ ] 스토리북 스토리 작성 (향후)
 
 이 폴더 구조를 통해 코드의 가독성, 유지보수성, 확장성을 모두 확보할 수 있습니다.
+
+---
+
+## 🎯 프론트엔드 모듈화 가이드라인 (2024.01.25 업데이트)
+
+### ✅ 실제 적용된 모듈화 사례
+
+#### 1. 대규모 파일 분해 성공 사례
+- **App.js**: 1,698줄 → 85줄 (95% 감소)
+- **분해 방법**: 기능별 훅과 컴포넌트로 분리
+- **결과**: 유지보수성과 가독성 대폭 향상
+
+#### 2. 커스텀 훅 분리 패턴
+
+##### A. 비즈니스 로직 훅
+```javascript
+// ✅ 템플릿 관리 로직 (527줄)
+export const useTemplateManagement = ({ showSuccess, showError, showInfo }) => {
+  // 상태 관리
+  const [savedTemplates, setSavedTemplates] = useState([]);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  
+  // 비즈니스 로직
+  const loadTemplates = useCallback(async () => { /* ... */ }, []);
+  const handleSaveTemplate = useCallback(async (templateData) => { /* ... */ }, []);
+  
+  return {
+    savedTemplates,
+    selectedTemplate,
+    loadTemplates,
+    handleSaveTemplate
+  };
+};
+```
+
+##### B. UI 상태 관리 훅
+```javascript
+// ✅ 셀 매핑 로직 (306줄)
+export const useCellMapping = ({ showSuccess, showError, showInfo }) => {
+  // 상태 관리
+  const [anchorCell, setAnchorCell] = useState(null);
+  const [valueCell, setValueCell] = useState(null);
+  const [keyMappings, setKeyMappings] = useState([]);
+  
+  // 이벤트 핸들러
+  const handleCellClick = useCallback((rowIndex, colIndex, cellValue) => { /* ... */ }, []);
+  const handleSaveMapping = useCallback((mappingData) => { /* ... */ }, []);
+  
+  return {
+    anchorCell,
+    valueCell,
+    keyMappings,
+    handleCellClick,
+    handleSaveMapping
+  };
+};
+```
+
+#### 3. 페이지 컴포넌트 분리 패턴
+
+##### A. 페이지별 상태 통합
+```javascript
+// ✅ DataExtractionPage (400줄)
+const DataExtractionPage = () => {
+  // 여러 훅을 조합하여 페이지 상태 관리
+  const { analysisResults, startAnalysis } = useAnalysis();
+  const { uploadedFiles } = useFileManagement();
+  const { keyMappings, handleCellClick } = useCellMapping({ showSuccess, showError, showInfo });
+  const { savedTemplates, handleSaveTemplate } = useTemplateManagement({ showSuccess, showError, showInfo });
+  
+  return (
+    <MultiSectionLayout>
+      <FileUploadSection />
+      <TableDataSection />
+      <KeySettingsSection />
+    </MultiSectionLayout>
+  );
+};
+```
+
+#### 4. 섹션 컴포넌트 분리 패턴
+
+##### A. 재사용 가능한 UI 섹션
+```javascript
+// ✅ FileUploadSection (80줄)
+const FileUploadSection = ({ 
+  selectedFile, 
+  onFileSelect, 
+  selectedLibrary, 
+  onLibraryChange, 
+  onStartAnalysis 
+}) => {
+  return (
+    <SectionContainer title="파일 업로드 및 분석 설정">
+      <FileUpload onFileSelect={onFileSelect} />
+      <Select 
+        value={selectedLibrary} 
+        onChange={onLibraryChange}
+        options={LIBRARY_OPTIONS}
+      />
+      <Button onClick={onStartAnalysis}>분석 시작</Button>
+    </SectionContainer>
+  );
+};
+```
+
+### 📋 모듈화 적용 규칙
+
+#### 1. 파일 크기 기준
+- **1,000줄 이상**: 반드시 분해 필요
+- **500줄 이상**: 분해 검토 권장
+- **200줄 이상**: 기능별 분리 고려
+
+#### 2. 분해 우선순위
+1. **가장 큰 기능 블록** (500줄 이상)
+2. **독립적인 기능** (다른 코드와 의존성 적음)
+3. **재사용 가능한 로직** (여러 곳에서 사용)
+4. **UI 섹션** (명확한 경계가 있는 부분)
+
+#### 3. 네이밍 규칙 강화
+- **훅**: `use` + 기능명 (예: `useTemplateManagement`)
+- **페이지**: 기능명 + `Page` (예: `DataExtractionPage`)
+- **섹션**: 기능명 + `Section` (예: `FileUploadSection`)
+- **컴포넌트**: 기능명 + `Component` (예: `TableGrid`)
+
+#### 4. 의존성 관리 규칙
+```javascript
+// ✅ 올바른 의존성 방향
+Page Component → Custom Hooks → Services → Utils
+
+// ❌ 잘못된 의존성 방향
+Hook → Page Component (훅이 페이지에 의존하면 안됨)
+Service → Hook (서비스가 훅에 의존하면 안됨)
+```
+
+### 🔧 모듈화 체크리스트
+
+#### 분해 전 체크사항
+- [ ] 파일이 1,000줄을 초과하는가?
+- [ ] 명확히 구분되는 기능 블록이 있는가?
+- [ ] 재사용 가능한 로직이 있는가?
+- [ ] 독립적으로 테스트할 수 있는 부분이 있는가?
+
+#### 분해 후 체크사항
+- [ ] 각 모듈이 단일 책임을 가지는가?
+- [ ] 의존성 방향이 올바른가?
+- [ ] 네이밍 규칙을 준수하는가?
+- [ ] 린터 에러가 없는가?
+- [ ] 기능이 정상 동작하는가?
+
+### 📊 모듈화 효과 측정
+
+#### 정량적 지표
+- **파일 크기 감소율**: 95% (1,698줄 → 85줄)
+- **모듈 수 증가**: 1개 → 11개 (훅 5개 + 페이지 3개 + 섹션 3개)
+- **린터 에러**: 0개
+- **재사용 가능 컴포넌트**: 8개
+
+#### 정성적 효과
+- **가독성**: 코드 구조가 명확해짐
+- **유지보수성**: 특정 기능 수정 시 해당 모듈만 수정
+- **테스트 용이성**: 각 모듈을 독립적으로 테스트 가능
+- **확장성**: 새로운 기능 추가 시 기존 코드 영향 최소화
+
+### 🚀 모듈화 적용 가이드
+
+#### 1단계: 분석
+- 파일 크기와 기능 블록 파악
+- 의존성 관계 분석
+- 재사용 가능한 부분 식별
+
+#### 2단계: 설계
+- 모듈 경계 정의
+- 인터페이스 설계
+- 네이밍 규칙 적용
+
+#### 3단계: 구현
+- 훅부터 분리 (비즈니스 로직)
+- 컴포넌트 분리 (UI 로직)
+- 페이지 통합 (상태 관리)
+
+#### 4단계: 검증
+- 기능 동작 확인
+- 린터 에러 해결
+- 성능 영향 측정
+
+이 가이드라인을 통해 대규모 파일을 효과적으로 모듈화할 수 있습니다.
