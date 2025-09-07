@@ -6,7 +6,7 @@ API v1 라우터 통합
 
 from fastapi import APIRouter
 
-from api.v1.endpoints import files, extraction, tables, relationships, analysis
+from api.v1.endpoints import files, extraction, tables, relationships, analysis, templates
 
 # 메인 API v1 라우터
 api_router = APIRouter()
@@ -45,4 +45,11 @@ api_router.include_router(
     prefix="/analysis",
     tags=["analysis"],
     responses={500: {"description": "분석 처리 오류"}}
+)
+
+api_router.include_router(
+    templates.router,
+    prefix="/templates",
+    tags=["templates"],
+    responses={404: {"description": "템플릿을 찾을 수 없음"}}
 )

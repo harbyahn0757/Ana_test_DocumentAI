@@ -1,267 +1,206 @@
 """
-PDF 테이블 추출 API 엔드포인트
-
-PDF 파일에서 테이블을 추출하는 API 제공
+데이터 추출 API 엔드포인트
+템플릿 기반 건강검진 데이터 추출을 위한 REST API 엔드포인트
 """
 
-from pathlib import Path
 from typing import List, Dict, Any, Optional
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form, Depends
+from fastapi.responses import JSONResponse
 import logging
 
-from fastapi import APIRouter, HTTPException, Depends, Query, Body
-from fastapi.responses import JSONResponse
-
-from app.dependencies import get_extraction_service, get_file_service
+from app.dependencies import get_error_handler
 from services.extraction_service import ExtractionService
-from services.file_service import FileService
-from models.table_models import ExtractionResult
+from utils.logging_config import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
-router = APIRouter()
+router = APIRouter(tags=["extraction"])
 
 
 @router.post("/extract")
-async def extract_tables(
-    request_data: Dict[str, Any] = Body(...),
-    extraction_service: ExtractionService = Depends(get_extraction_service),
-    file_service: FileService = Depends(get_file_service)
-):
+async def extract_data(
+    file: UploadFile = File(...),
+    mappings: str = Form(...),  # JSON 문자열
+    processor_type: str = Form("pdfplumber"),
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
     """
-    PDF 파일에서 테이블 추출
+    데이터 추출 API (템플릿 기반)
+    PDF 파일에서 설정된 매핑에 따라 건강검진 데이터를 추출합니다.
     
-    Request Body:
-        filename (str): 추출할 파일명
-        library (str, optional): 사용할 라이브러리 (기본: pdfplumber)
-        options (dict, optional): 라이브러리별 옵션
-        use_cache (bool, optional): 캐시 사용 여부 (기본: True)
+    Args:
+        file: 업로드된 PDF 파일
+        mappings: JSON 문자열로 인코딩된 키-값 매핑 설정
+        processor_type: PDF 처리기 타입 (pdfplumber, camelot, tabula)
+        
+    Returns:
+        JSONResponse: 추출 결과
     """
     try:
-        filename = request_data.get("filename")
-        library = request_data.get("library", "pdfplumber")
-        options = request_data.get("options", {})
-        use_cache = request_data.get("use_cache", True)
+        import json
+        import tempfile
+        import os
         
-        if not filename:
-            raise HTTPException(status_code=400, detail="filename이 필요합니다")
+        # 파일 저장
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            temp_file_path = temp_file.name
         
-        # 파일 경로 확인
-        file_path = file_service.get_upload_path(filename)
-        if not file_path.exists():
-            # 샘플 파일에서도 확인
-            file_path = file_service.get_sample_path(filename)
-            if not file_path.exists():
-                raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
-        
-        # 테이블 추출 수행
-        result = await extraction_service.extract_tables_from_file(
-            file_path, library, options, use_cache
-        )
-        
-        logger.info(f"테이블 추출 API 완료: {filename}, {result.total_tables}개 테이블")
-        
-        return {
-            "success": result.success,
-            "message": "테이블 추출 완료" if result.success else "테이블 추출 실패",
-            "data": result.model_dump(),
-            "error": result.error_message if not result.success else None
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"테이블 추출 API 오류: {e}")
-        raise HTTPException(status_code=500, detail=f"추출 중 오류 발생: {str(e)}")
-
-
-@router.post("/extract-page")
-async def extract_tables_from_page(
-    request_data: Dict[str, Any] = Body(...),
-    extraction_service: ExtractionService = Depends(get_extraction_service),
-    file_service: FileService = Depends(get_file_service)
-):
-    """
-    특정 페이지에서 테이블 추출
+        try:
+            # 매핑 설정 파싱
+            mapping_list = json.loads(mappings)
+            
+            # 추출 서비스 실행
+            extraction_service = ExtractionService()
+            result = await extraction_service.extract_data_with_mappings(
+                file_path=temp_file_path,
+                mappings=mapping_list,
+                processor_type=processor_type
+            )
+            
+            # 결과 포맷팅
+            response_data = {
+                "success": True,
+                "file_name": file.filename,
+                "extracted_count": len(result.get("extracted_data", [])),
+                "extracted_data": result.get("extracted_data", []),
+                "processing_time": result.get("processing_time", 0),
+                "extracted_at": result.get("extracted_at")
+            }
+            
+            logger.info(f"데이터 추출 완료: {file.filename}, {len(result.get('extracted_data', []))}개 항목")
+            return JSONResponse(content=response_data)
+            
+        finally:
+            # 임시 파일 삭제
+            if os.path.exists(temp_file_path):
+                os.unlink(temp_file_path)
+                
+    except json.JSONDecodeError as e:
+        logger.error(f"매핑 설정 파싱 실패: {str(e)}")
+        raise HTTPException(status_code=400, detail="잘못된 매핑 설정 형식입니다")
     
-    Request Body:
-        filename (str): 추출할 파일명
-        page_number (int): 페이지 번호 (1부터 시작)
-        library (str, optional): 사용할 라이브러리 (기본: pdfplumber)
-        options (dict, optional): 라이브러리별 옵션
-    """
-    try:
-        filename = request_data.get("filename")
-        page_number = request_data.get("page_number")
-        library = request_data.get("library", "pdfplumber")
-        options = request_data.get("options", {})
-        
-        if not filename:
-            raise HTTPException(status_code=400, detail="filename이 필요합니다")
-        
-        if not page_number or page_number < 1:
-            raise HTTPException(status_code=400, detail="올바른 page_number가 필요합니다")
-        
-        # 파일 경로 확인
-        file_path = file_service.get_upload_path(filename)
-        if not file_path.exists():
-            file_path = file_service.get_sample_path(filename)
-            if not file_path.exists():
-                raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
-        
-        # 페이지별 테이블 추출
-        tables = await extraction_service.extract_tables_from_page(
-            file_path, page_number, library, options
-        )
-        
-        logger.info(f"페이지 테이블 추출 API 완료: {filename}, 페이지 {page_number}, {len(tables)}개 테이블")
-        
-        return {
-            "success": True,
-            "message": "페이지 테이블 추출 완료",
-            "data": {
-                "filename": filename,
-                "page_number": page_number,
-                "library": library,
-                "total_tables": len(tables),
-                "tables": [table.model_dump() for table in tables]
-            }
-        }
-        
-    except HTTPException:
-        raise
     except Exception as e:
-        logger.error(f"페이지 테이블 추출 API 오류: {e}")
-        raise HTTPException(status_code=500, detail=f"추출 중 오류 발생: {str(e)}")
+        logger.error(f"데이터 추출 실패: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"데이터 추출 중 오류가 발생했습니다: {str(e)}")
 
 
-@router.get("/libraries")
-async def get_supported_libraries(
-    extraction_service: ExtractionService = Depends(get_extraction_service)
-):
-    """지원하는 PDF 처리 라이브러리 목록 조회"""
-    try:
-        libraries = await extraction_service.get_supported_libraries()
-        
-        return {
-            "success": True,
-            "message": "지원 라이브러리 조회 완료",
-            "data": {
-                "libraries": libraries,
-                "total_count": len(libraries)
-            }
-        }
-        
-    except Exception as e:
-        logger.error(f"라이브러리 조회 API 오류: {e}")
-        raise HTTPException(status_code=500, detail=f"조회 중 오류 발생: {str(e)}")
-
-
-@router.post("/validate-options")
-async def validate_extraction_options(
-    request_data: Dict[str, Any] = Body(...),
-    extraction_service: ExtractionService = Depends(get_extraction_service)
-):
+@router.post("/quick-test")
+async def quick_test(
+    file: UploadFile = File(...),
+    template_name: str = Form(...),
+    mappings: str = Form(...),  # JSON 문자열
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
     """
-    추출 옵션 유효성 검증
+    빠른 추출 테스트 API
+    설정된 매핑으로 간단한 추출 테스트를 수행합니다.
     
-    Request Body:
-        library (str): 라이브러리 이름
-        options (dict): 검증할 옵션
+    Args:
+        file: 업로드된 PDF 파일
+        template_name: 템플릿 이름
+        mappings: JSON 문자열로 인코딩된 키-값 매핑 설정
+        
+    Returns:
+        JSONResponse: 테스트 결과
     """
     try:
-        library = request_data.get("library")
-        options = request_data.get("options", {})
+        import json
+        import tempfile
+        import os
         
-        if not library:
-            raise HTTPException(status_code=400, detail="library가 필요합니다")
+        # 파일 저장
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            content = await file.read()
+            temp_file.write(content)
+            temp_file_path = temp_file.name
         
-        validation_result = await extraction_service.validate_extraction_options(
-            library, options
-        )
-        
-        return {
-            "success": True,
-            "message": "옵션 검증 완료",
-            "data": validation_result
-        }
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"옵션 검증 API 오류: {e}")
-        raise HTTPException(status_code=500, detail=f"검증 중 오류 발생: {str(e)}")
-
-
-@router.post("/compare")
-async def compare_extraction_results(
-    request_data: Dict[str, Any] = Body(...),
-    extraction_service: ExtractionService = Depends(get_extraction_service),
-    file_service: FileService = Depends(get_file_service)
-):
-    """
-    여러 라이브러리로 추출 결과 비교
+        try:
+            # 매핑 설정 파싱
+            mapping_list = json.loads(mappings)
+            
+            # 빠른 테스트 실행
+            extraction_service = ExtractionService()
+            result = await extraction_service.quick_test(
+                file_path=temp_file_path,
+                template_name=template_name,
+                mappings=mapping_list
+            )
+            
+            logger.info(f"빠른 테스트 완료: {file.filename}")
+            return JSONResponse(content=result)
+            
+        finally:
+            # 임시 파일 삭제
+            if os.path.exists(temp_file_path):
+                os.unlink(temp_file_path)
+                
+    except json.JSONDecodeError as e:
+        logger.error(f"매핑 설정 파싱 실패: {str(e)}")
+        raise HTTPException(status_code=400, detail="잘못된 매핑 설정 형식입니다")
     
-    Request Body:
-        filename (str): 비교할 파일명
-        libraries (list): 비교할 라이브러리 목록
-        options (dict, optional): 라이브러리별 옵션
+    except Exception as e:
+        logger.error(f"빠른 테스트 실패: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"빠른 테스트 중 오류가 발생했습니다: {str(e)}")
+
+
+@router.post("/validate-mappings")
+async def validate_mappings(
+    mappings: List[Dict[str, Any]],
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
+    """
+    매핑 설정 검증 API
+    추출 매핑 설정의 유효성을 검증합니다.
+    
+    Args:
+        mappings: 검증할 매핑 설정 목록
+        
+    Returns:
+        JSONResponse: 검증 결과
     """
     try:
-        filename = request_data.get("filename")
-        libraries = request_data.get("libraries", ["pdfplumber", "camelot", "tabula"])
-        options = request_data.get("options", {})
+        logger.info(f"매핑 검증 요청: {len(mappings)}개 매핑")
         
-        if not filename:
-            raise HTTPException(status_code=400, detail="filename이 필요합니다")
+        # 매핑 검증 로직
+        extraction_service = ExtractionService()
+        validation_result = await extraction_service.validate_mappings(mappings)
         
-        if not libraries:
-            raise HTTPException(status_code=400, detail="libraries가 필요합니다")
+        logger.info(f"매핑 검증 완료: {validation_result.get('valid_count', 0)}개 유효")
+        return JSONResponse(content=validation_result)
         
-        # 파일 경로 확인
-        file_path = file_service.get_upload_path(filename)
-        if not file_path.exists():
-            file_path = file_service.get_sample_path(filename)
-            if not file_path.exists():
-                raise HTTPException(status_code=404, detail="파일을 찾을 수 없습니다")
-        
-        # 비교 추출 수행
-        comparison_results = await extraction_service.compare_extraction_results(
-            file_path, libraries, options
-        )
-        
-        # 결과 요약 생성
-        summary = {
-            "total_libraries": len(comparison_results),
-            "successful_extractions": sum(1 for result in comparison_results.values() if result.success),
-            "failed_extractions": sum(1 for result in comparison_results.values() if not result.success),
-            "results_by_library": {}
-        }
-        
-        for library, result in comparison_results.items():
-            summary["results_by_library"][library] = {
-                "success": result.success,
-                "total_tables": result.total_tables,
-                "processing_time": result.processing_time,
-                "error": result.error_message if not result.success else None
-            }
-        
-        logger.info(f"라이브러리 비교 API 완료: {filename}, {len(libraries)}개 라이브러리")
-        
-        return {
-            "success": True,
-            "message": "라이브러리 비교 완료",
-            "data": {
-                "filename": filename,
-                "summary": summary,
-                "detailed_results": {
-                    library: result.model_dump() 
-                    for library, result in comparison_results.items()
-                }
-            }
-        }
-        
-    except HTTPException:
-        raise
     except Exception as e:
-        logger.error(f"라이브러리 비교 API 오류: {e}")
-        raise HTTPException(status_code=500, detail=f"비교 중 오류 발생: {str(e)}")
+        logger.error(f"매핑 검증 실패: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"매핑 검증 중 오류가 발생했습니다: {str(e)}")
+
+
+@router.get("/health")
+async def health_check() -> JSONResponse:
+    """
+    추출 서비스 상태 확인 API
+    
+    Returns:
+        JSONResponse: 서비스 상태
+    """
+    try:
+        # 서비스 초기화 테스트
+        service = ExtractionService()
+        
+        return JSONResponse(content={
+            "status": "healthy",
+            "service": "extraction",
+            "version": "1.0.0",
+            "timestamp": "2025-01-27T00:00:00Z"
+        })
+        
+    except Exception as e:
+        logger.error(f"상태 확인 실패: {str(e)}")
+        return JSONResponse(
+            status_code=503,
+            content={
+                "status": "unhealthy",
+                "service": "extraction",
+                "error": str(e)
+            }
+        )

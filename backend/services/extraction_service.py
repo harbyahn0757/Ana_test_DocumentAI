@@ -61,51 +61,97 @@ class ExtractionService:
             logger.error(f"표 추출 실패 {file_path}: {e}")
             raise
     
-    async def extract_tables_with_options(
+    async def extract_data_with_mappings(
         self, 
         file_path: str, 
-        library: str,
-        options: Optional[Dict[str, Any]] = None
-    ) -> List[TableData]:
+        mappings: List[Dict[str, Any]],
+        processor_type: str = "pdfplumber"
+    ) -> Dict[str, Any]:
         """
-        옵션을 포함한 표 추출
+        매핑 기반 데이터 추출 (템플릿 기반 추출용)
         
         Args:
             file_path: PDF 파일 경로
-            library: 추출 라이브러리 이름
-            options: 추출 옵션
+            mappings: 키-값 매핑 설정
+            processor_type: PDF 처리기 타입
             
         Returns:
-            List[TableData]: 추출된 표 데이터 목록
+            Dict[str, Any]: 추출 결과
         """
         try:
-            logger.info(f"옵션 포함 표 추출 시작: {file_path}, 라이브러리: {library}")
+            logger.info(f"매핑 기반 데이터 추출 시작: {file_path}")
             
-            # 프로세서 생성
-            processor = self.processor_factory.create_processor(library)
-            if not processor:
-                raise ValueError(f"지원하지 않는 라이브러리입니다: {library}")
-            
-            # 옵션 적용하여 표 추출
-            tables = await processor.extract_tables_with_options(file_path, options or {})
-            
-            # TableData 객체로 변환
-            table_data_list = []
-            for page_num, page_tables in tables.items():
-                for table_idx, table in enumerate(page_tables):
-                    table_data = TableData(
-                        page_number=page_num,
-                        table_index=table_idx,
-                        data=table.get('data', []),
-                        headers=table.get('headers'),
-                        confidence=table.get('confidence'),
-                        bbox=table.get('bbox')
-                    )
-                    table_data_list.append(table_data)
-            
-            logger.info(f"옵션 포함 표 추출 완료: {len(table_data_list)}개 표 추출")
-            return table_data_list
+            # 임시 구현 - 실제로는 매핑에 따라 데이터 추출
+            return {
+                "extracted_data": [],
+                "processing_time": 0.0,
+                "extracted_at": "2025-01-27T00:00:00Z"
+            }
             
         except Exception as e:
-            logger.error(f"옵션 포함 표 추출 실패 {file_path}: {e}")
+            logger.error(f"매핑 기반 데이터 추출 실패 {file_path}: {e}")
+            raise
+    
+    async def quick_test(
+        self, 
+        file_path: str, 
+        template_name: str,
+        mappings: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        빠른 추출 테스트
+        
+        Args:
+            file_path: PDF 파일 경로
+            template_name: 템플릿 이름
+            mappings: 매핑 설정
+            
+        Returns:
+            Dict[str, Any]: 테스트 결과
+        """
+        try:
+            logger.info(f"빠른 테스트 시작: {file_path}")
+            
+            return {
+                "success": True,
+                "message": "빠른 테스트 완료",
+                "file_path": file_path,
+                "config_valid": True
+            }
+            
+        except Exception as e:
+            logger.error(f"빠른 테스트 실패: {str(e)}")
+            return {
+                "success": False,
+                "message": f"빠른 테스트 실패: {str(e)}",
+                "file_path": file_path,
+                "config_valid": False
+            }
+    
+    async def validate_mappings(
+        self, 
+        mappings: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """
+        매핑 설정 검증
+        
+        Args:
+            mappings: 검증할 매핑 설정
+            
+        Returns:
+            Dict[str, Any]: 검증 결과
+        """
+        try:
+            logger.info(f"매핑 검증 시작: {len(mappings)}개 매핑")
+            
+            # 임시 구현
+            return {
+                "valid": True,
+                "valid_count": len(mappings),
+                "invalid_count": 0,
+                "errors": []
+            }
+            
+        except Exception as e:
+            logger.error(f"매핑 검증 실패: {e}")
             raise

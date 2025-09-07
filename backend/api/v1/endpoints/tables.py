@@ -10,8 +10,9 @@ import logging
 from fastapi import APIRouter, HTTPException, Depends, Query, Body
 from fastapi.responses import JSONResponse
 
-from app.dependencies import get_extraction_service, get_cache_manager
-from services.extraction_service import ExtractionService
+from app.dependencies import get_cache_manager
+# from app.dependencies import get_extraction_service  # 임시로 주석 처리
+# from services.extraction_service import ExtractionService  # 임시로 주석 처리
 from storage.cache_manager import CacheManager
 
 logger = logging.getLogger(__name__)

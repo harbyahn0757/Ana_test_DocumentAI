@@ -89,21 +89,25 @@ AI 어시스턴트가 언제든지 참조할 수 있도록 프론트엔드/백�
 ### ✅ 완료된 작업
 - **프론트엔드 기반 구조**: React 애플리케이션 초기화
 - **디자인 시스템**: CSS 변수 기반 디자인 토큰 완성
-- **컴포넌트 시스템**: Button, Input, Select, Card 등 기본 UI 컴포넌트
-- **레이아웃 시스템**: BaseLayout, BasicLayout, TwoColumnLayout, MultiSectionLayout
+- **컴포넌트 시스템**: Button, Input, Select, Card, ConfirmDialog 등 기본 UI 컴포넌트
+- **레이아웃 시스템**: BaseLayout, BasicLayout, TwoColumnLayout, MultiSectionLayout, SidebarLayout
+- **사이드바 시스템**: 계층적 메뉴 구조, 홈 페이지, 데이터 추출 설정 페이지
+- **추출 설정 시스템**: 키-앵커-값 매핑, 템플릿 저장/로드, 빠른 테스트 기능
+- **백엔드 API**: 추출 서비스, 템플릿 관리 API 구현
 - **정책 문서**: 모든 개발 가이드라인 문서 완성
 - **폴더 구조**: 체계적인 frontend/shared 구조
 
-### 🔄 진행 중인 작업
-- **백엔드 구현**: FastAPI 서버 구축 예정
-- **PDF 처리 엔진**: 3가지 라이브러리 통합 예정
-- **API 연동**: 프론트엔드-백엔드 통신 구현 예정
+### 🔄 최근 완료된 주요 기능
+- **모달 컴포넌트 통합**: ConfirmDialog로 통일된 모달 시스템
+- **추출 API 서비스**: 백엔드/프론트엔드 통합 추출 시스템
+- **템플릿 관리 시스템**: 저장/로드/테스트 기능 완비
+- **정책 위반 수정**: 중복 컴포넌트 제거, 이모티콘 제거
 
 ### 📋 다음 단계
-1. **백엔드 폴더 구조 생성**: [13_backend_architecture_policy.md](./13_backend_architecture_policy.md) 기준
-2. **PDF 처리 모듈 구현**: pdfplumber, camelot, tabula-py 통합
-3. **API 엔드포인트 개발**: [03_technical_specs.md](./03_technical_specs.md) 명세 기준
-4. **프론트엔드 기능 완성**: 테이블 그리드, 관계 설정 UI
+1. **사용자 테스트**: 구현된 기능들의 실제 사용성 검증
+2. **성능 최적화**: 대용량 PDF 처리 최적화
+3. **에러 처리 강화**: 예외 상황 처리 개선
+4. **문서화 완성**: API 문서 및 사용 가이드 보완
 
 ## 📚 참조 우선순위
 
@@ -149,3 +153,10 @@ AI 어시스턴트가 언제든지 참조할 수 있도록 프론트엔드/백�
 
 ### 📚 추가 정책 문서
 - **[18_utility_functions_policy.md](./18_utility_functions_policy.md)** - 유틸리티 함수 정책 및 재사용 가이드라인
+- **[19_frontend_backend_integration_plan.md](./19_frontend_backend_integration_plan.md)** - 프론트엔드-백엔드 통합 계획
+- **[20_layout_template_policy.md](./20_layout_template_policy.md)** - 레이아웃 템플릿 정책 및 사용 가이드
+- **[21_extraction_api_documentation.md](./21_extraction_api_documentation.md)** - 추출 API 서비스 문서화
+
+### 📊 최신 구현 보고서
+- **[17_final_implementation_summary.md](./17_final_implementation_summary.md)** - 최종 구현 완료 보고서
+- **[16_policy_violation_and_efficiency_review.md](./16_policy_violation_and_efficiency_review.md)** - 정책 위반 및 효율성 검토

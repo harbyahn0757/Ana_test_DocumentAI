@@ -1,7 +1,6 @@
 """
-분석 관련 API 엔드포인트
-
-PDF 파일 분석, 표 추출, 관계 설정 등의 기능을 제공
+분석 API 엔드포인트 (설정을 위한 추출)
+PDF 파일에서 모든 테이블을 추출하여 화면에 표시하는 용도
 """
 
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
@@ -24,7 +23,9 @@ async def start_analysis(
     analysis_service: AnalysisService = Depends(get_analysis_service),
     error_handler = Depends(get_error_handler)
 ):
-    """분석 시작
+    """분석 시작 (설정을 위한 추출)
+    
+    PDF 파일에서 모든 테이블을 추출하여 화면에 표시하기 위한 분석을 시작합니다.
     
     Args:
         request: 분석 요청 데이터
@@ -99,13 +100,15 @@ async def get_analysis_results(
     analysis_service: AnalysisService = Depends(get_analysis_service),
     error_handler = Depends(get_error_handler)
 ):
-    """분석 결과 조회
+    """분석 결과 조회 (설정을 위한 추출 결과)
+    
+    PDF에서 추출된 모든 테이블 데이터를 반환합니다.
     
     Args:
         analysis_id: 분석 ID
         
     Returns:
-        dict: 분석 결과 데이터
+        dict: 분석 결과 데이터 (테이블 목록)
     """
     try:
         logger.info(f"분석 결과 조회: {analysis_id}")
@@ -115,8 +118,32 @@ async def get_analysis_results(
         if not results:
             error_handler.handle_analysis_not_found(analysis_id)
         
+        # 프론트엔드에 맞춰서 results 객체로 감싸서 응답
+        # 페이지별로 테이블을 그룹화
+        pages = {}
+        for table in results["tables"]:
+            page_num = table.get("page_number", 1)
+            if page_num not in pages:
+                pages[page_num] = []
+            pages[page_num].append(table)
+        
+        response_data = {
+            "analysis_id": results["analysis_id"],
+            "file_id": results["file_id"],
+            "library": results["library"],
+            "status": results["status"],
+            "results": {
+                "pages": pages,  # 페이지별 테이블 그룹
+                "tables": results["tables"],  # 전체 테이블 목록
+                "total_tables": results["total_tables"],
+                "total_pages": results.get("total_pages", len(pages)),
+                "processing_time": results["processing_time"],
+                "created_at": results["created_at"]
+            }
+        }
+        
         logger.info(f"분석 결과 조회 완료: {analysis_id}")
-        return results
+        return response_data
     
     except HTTPException:
         raise
