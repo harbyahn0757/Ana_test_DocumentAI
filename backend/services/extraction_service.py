@@ -78,14 +78,94 @@ class ExtractionService:
         Returns:
             Dict[str, Any]: 추출 결과
         """
+        import time
+        from datetime import datetime
+        
+        start_time = time.time()
+        
         try:
             logger.info(f"매핑 기반 데이터 추출 시작: {file_path}")
             
-            # 임시 구현 - 실제로는 매핑에 따라 데이터 추출
+            # 1. 먼저 테이블 추출
+            tables = await self.extract_tables(file_path, processor_type)
+            
+            if not tables:
+                logger.warning("추출된 테이블이 없습니다")
+                return {
+                    "extracted_data": [],
+                    "processing_time": time.time() - start_time,
+                    "extracted_at": datetime.now().isoformat()
+                }
+            
+            # 2. 매핑에 따라 데이터 추출
+            extracted_data = []
+            
+            for mapping in mappings:
+                try:
+                    # 매핑 정보 파싱
+                    key = mapping.get("key")
+                    key_label = mapping.get("key_label", key)
+                    anchor_cell = mapping.get("anchor_cell", {})
+                    value_cell = mapping.get("value_cell", {})
+                    
+                    if not anchor_cell or not value_cell:
+                        logger.warning(f"매핑 정보가 불완전합니다: {key}")
+                        continue
+                    
+                    # 앵커 셀 정보
+                    anchor_row = anchor_cell.get("row")
+                    anchor_col = anchor_cell.get("col")
+                    anchor_value = anchor_cell.get("value")
+                    
+                    # 값 셀 정보
+                    value_row = value_cell.get("row")
+                    value_col = value_cell.get("col")
+                    
+                    # 테이블에서 해당 데이터 찾기
+                    extracted_value = None
+                    confidence = 0.0
+                    
+                    for table in tables:
+                        # TableData 모델의 data 속성 사용
+                        table_data = table.data if hasattr(table, 'data') else table.rows if hasattr(table, 'rows') else []
+                        
+                        if (anchor_row < len(table_data) and 
+                            anchor_col < len(table_data[anchor_row]) and
+                            table_data[anchor_row][anchor_col] == anchor_value):
+                            
+                            # 앵커를 찾았으면 값 추출
+                            if (value_row < len(table_data) and 
+                                value_col < len(table_data[value_row])):
+                                extracted_value = table_data[value_row][value_col]
+                                confidence = 1.0
+                                break
+                    
+                    if extracted_value is not None:
+                        extracted_data.append({
+                            "key": key,
+                            "key_label": key_label,
+                            "extracted_value": extracted_value,
+                            "anchor_cell": anchor_cell,
+                            "value_cell": value_cell,
+                            "relative_position": mapping.get("relative_position", {}),
+                            "confidence": confidence
+                        })
+                        logger.info(f"데이터 추출 성공: {key} = {extracted_value}")
+                    else:
+                        logger.warning(f"데이터 추출 실패: {key} - 앵커를 찾을 수 없음")
+                        
+                except Exception as e:
+                    logger.error(f"매핑 처리 중 오류 ({mapping.get('key', 'unknown')}): {e}")
+                    continue
+            
+            processing_time = time.time() - start_time
+            
+            logger.info(f"매핑 기반 데이터 추출 완료: {len(extracted_data)}개 항목, {processing_time:.2f}초")
+            
             return {
-                "extracted_data": [],
-                "processing_time": 0.0,
-                "extracted_at": "2025-01-27T00:00:00Z"
+                "extracted_data": extracted_data,
+                "processing_time": processing_time,
+                "extracted_at": datetime.now().isoformat()
             }
             
         except Exception as e:

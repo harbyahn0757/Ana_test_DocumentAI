@@ -486,36 +486,60 @@ class FileService:
         
         return None
     
-    async def get_file_download(self, filename: str) -> Optional[Dict[str, Any]]:
+    async def _find_file_by_id(self, file_id: str):
+        """
+        file_id로 파일 정보 찾기
+        
+        Args:
+            file_id: 파일 ID
+            
+        Returns:
+            FileInfo: 파일 정보 또는 None
+        """
+        try:
+            uploaded_files = await self.get_uploaded_files()
+            for file in uploaded_files:
+                if hasattr(file, 'file_id') and file.file_id == file_id:
+                    return file
+            return None
+        except Exception as e:
+            logger.error(f"파일 ID로 검색 실패 {file_id}: {e}")
+            return None
+    
+    async def get_file_download(self, file_id: str):
         """
         파일 다운로드 정보 생성
         
         Args:
-            filename: 파일명
+            file_id: 파일 ID
             
         Returns:
-            Optional[Dict[str, Any]]: 다운로드 정보
+            FileResponse: 파일 다운로드 응답
         """
+        from fastapi.responses import FileResponse
+        
         try:
-            file_path = self.upload_dir / filename
-            
-            if not file_path.exists():
-                return None
-            
-            file_info = await self._create_file_info(file_path)
+            # file_id로 파일 정보 찾기
+            file_info = await self._find_file_by_id(file_id)
             if not file_info:
+                logger.warning(f"파일을 찾을 수 없습니다: {file_id}")
                 return None
             
-            return {
-                "file_path": str(file_path),
-                "filename": filename,
-                "size": file_info.size,
-                "mime_type": file_info.mime_type,
-                "content_type": file_info.mime_type or "application/octet-stream"
-            }
+            # 실제 파일 경로 확인
+            file_path = self.upload_dir / file_info.file_name
+            if not file_path.exists():
+                logger.warning(f"파일이 존재하지 않습니다: {file_path}")
+                return None
+            
+            # FileResponse 반환
+            return FileResponse(
+                path=str(file_path),
+                filename=file_info.file_name,
+                media_type=file_info.mime_type or "application/octet-stream"
+            )
             
         except Exception as e:
-            logger.error(f"다운로드 정보 생성 실패 {filename}: {e}")
+            logger.error(f"다운로드 정보 생성 실패 {file_id}: {e}")
             return None
     
     async def batch_delete_files(self, filenames: List[str]) -> Dict[str, Any]:
