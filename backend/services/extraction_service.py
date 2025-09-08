@@ -267,12 +267,18 @@ class ExtractionService:
             logger.info(f"키 매핑 DB 로드 완료: {len(key_mapping_db)}개 키")
             
             for table in tables:
-                if not table.data:
+                if not table.rows:
                     continue
                     
-                logger.info(f"표 분석 중: 페이지 {table.page_number}, {table.rows}행 x {table.columns}열")
+                logger.info(f"표 분석 중: 페이지 {table.page_number}, {len(table.rows)}행 x {table.col_count}열")
                 
-                for row_idx, row in enumerate(table.data):
+                # 헤더와 데이터 행을 모두 포함하여 분석
+                all_rows = []
+                if table.headers:
+                    all_rows.append(table.headers)
+                all_rows.extend(table.rows)
+                
+                for row_idx, row in enumerate(all_rows):
                     for col_idx, cell_value in enumerate(row):
                         if not cell_value or not isinstance(cell_value, str):
                             continue
