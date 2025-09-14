@@ -1,6 +1,6 @@
 {
   "openai": {
-    "api_key": "${OPENAI_API_KEY}",
+    "api_key": "your_openai_api_key_here",
     "model": "gpt-4o-mini",
     "max_tokens": 2000,
     "temperature": 0.1,
