@@ -264,7 +264,12 @@ class Settings(BaseSettings):
                 # OpenAI 설정 로드
                 if 'openai' in config_data:
                     openai_config = config_data['openai']
-                    self.openai_api_key = openai_config.get('api_key')
+                    api_key = openai_config.get('api_key')
+                    # 환경변수 플레이스홀더 처리
+                    if api_key == "${OPENAI_API_KEY}":
+                        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+                    else:
+                        self.openai_api_key = api_key
                     self.openai_model = openai_config.get('model', self.openai_model)
                     self.openai_max_tokens = openai_config.get('max_tokens', self.openai_max_tokens)
                     self.openai_temperature = openai_config.get('temperature', self.openai_temperature)

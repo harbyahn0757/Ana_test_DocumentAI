@@ -1,11 +1,13 @@
-# Google Cloud 설정
-GOOGLE_CLOUD_PROJECT_ID=your-project-id-here
-GOOGLE_CLOUD_LOCATION=us
-DOCUMENT_AI_PROCESSOR_ID=your-processor-id-here
+# OpenAI API Configuration
+OPENAI_API_KEY=your_openai_api_key_here
 
-# Google Cloud 인증 (서비스 계정 키 파일 경로)
-GOOGLE_APPLICATION_CREDENTIALS=path/to/your/service-account-key.json
+# Development Environment Variables  
+NODE_ENV=development
+DEBUG=true
 
-# Document AI 설정
-DOCUMENT_AI_ENDPOINT=https://us-documentai.googleapis.com
+# Backend Configuration
+BACKEND_HOST=localhost
+BACKEND_PORT=8000
 
+# Frontend Configuration
+REACT_APP_BACKEND_URL=http://localhost:8000
