@@ -161,7 +161,10 @@ class AIExtractionService:
 ## 중요 규칙
 - extracted_value는 반드시 문자열로 반환
 - confidence는 0.0~1.0 사이의 실수
-- suggested_position은 앵커 셀 기준 상대 좌표 (앵커가 0,0)
+- suggested_position은 반드시 앵커 셀 기준 상대 좌표로 반환
+  * 앵커 셀 위치: 행 {request.anchor_cell.get('row', 'N/A')}, 열 {request.anchor_cell.get('col', 'N/A')}
+  * 상대 좌표 계산: (값_행 - 앵커_행, 값_열 - 앵커_열)
+  * 예시: 앵커가 (1,15)이고 값이 (1,18)이면 상대좌표는 (0,3)
   * 오른쪽 1칸: {{"row": 0, "col": 1}}
   * 아래쪽 1칸: {{"row": 1, "col": 0}}
   * 왼쪽 1칸: {{"row": 0, "col": -1}}
@@ -174,7 +177,13 @@ class AIExtractionService:
 키: "체중" -> 값: "65kg" 또는 "65"
 키: "혈압" -> 값: "120/80" 또는 "120/80mmHg"
 
-이제 "{request.key_label}" 키의 값을 찾아주세요:
+## 상대 좌표 계산 예시
+- 앵커 셀: (1, 15) "전화번호"
+- 값 셀: (1, 18) "01036595213"
+- 상대 좌표: (1-1, 18-15) = (0, 3)
+- 따라서 suggested_position: {{"row": 0, "col": 3}}
+
+이제 "{request.key_label}" 키의 값을 찾고 정확한 상대 좌표를 계산해주세요:
 """
         
         # 프롬프트 콘솔 로깅
