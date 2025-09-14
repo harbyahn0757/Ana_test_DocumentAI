@@ -1,0 +1,229 @@
+# Ana Document AI 프로젝트 - Cursor 규칙
+
+## 기본 응답 규칙
+- 모든 응답은 한국어로 작성
+- 이모티콘 사용 절대 금지 (전문적인 UI 유지)
+- 변수를 읽을 때 의미 파악하지 말고 코드만 보고 분석
+- 코드 전체 외에 다른 상상으로 대답 금지
+- 모르거나 기억 안 나는 것은 정확하게 질문
+
+## 프론트엔드 개발 정책
+
+### 컴포넌트 관리 및 모듈화
+- 컴포넌트를 한곳에 넣고 직렬화해서 사용 (사용자 선호)
+- 재사용 가능한 컴포넌트는 `frontend/src/shared/components/` 에 위치
+- 기능별 전용 컴포넌트는 `frontend/src/features/{feature-name}/components/` 에 위치
+- 파일 크기 제한: 1,000줄 초과 시 반드시 분해, 500줄 이상 시 분해 검토
+- 커스텀 훅으로 비즈니스 로직 분리 (`use` + 기능명)
+- 페이지 컴포넌트는 기능명 + `Page` 패턴 사용
+
+### 폴더 구조 정책
+```
+frontend/src/
+├── shared/               # 공통 모듈
+│   ├── components/       # 재사용 컴포넌트
+│   │   ├── ui/          # 기본 UI (Button, Input 등)
+│   │   └── layout/      # 레이아웃 컴포넌트
+│   ├── hooks/           # 공통 커스텀 훅
+│   ├── styles/          # 글로벌 스타일 (design-tokens.css 포함)
+│   └── utils/           # 유틸리티 함수
+├── features/            # 기능별 모듈
+│   ├── pdf_processing/  # PDF 처리 기능
+│   ├── table_display/   # 테이블 표시 기능
+│   └── relationship_management/ # 관계 설정 기능
+```
+
+### 스타일링 정책
+- Pretendard 폰트 필수 사용 (모든 컴포넌트와 텍스트)
+- 디자인 토큰 시스템 사용 (`frontend/src/shared/styles/design-tokens.css`)
+- 승인된 색상만 사용 (CSS 변수로만 지정, 하드코딩 절대 금지)
+- 이모티콘 완전 제거 정책 (📊, 🎯, ⚙️, 💾, 📄, 📁 등 모든 유니코드 이모티콘 사용 금지)
+- 드롭다운은 시각적으로 가볍고 덜 무거운 모양
+
+### 승인된 색상 시스템
+```css
+/* 메인 색상 (회색 계열) */
+--color-primary: #6B7280;
+--color-primary-dark: #4B5563;
+--color-primary-light: #9CA3AF;
+
+/* 포인트 색상 (주황 계열) */
+--color-accent: #F97316;
+--color-accent-dark: #EA580C;
+--color-accent-light: #FB923C;
+--color-accent-pale: #FEF3E2;
+
+/* 배경 색상 */
+--color-background: #F9FAFB;
+--color-surface: #FFFFFF;
+--color-border: #E5E7EB;
+
+/* 특수 기능 색상 */
+--color-anchor: #3B82F6;      # 앵커(기준점) - 파란색
+--color-value: #F97316;       # 값 - 주황색
+--color-selected: #10B981;    # 선택됨 - 초록색
+```
+
+### 레이아웃 시스템
+- ThreeColumnLayout (현재 사용): Header + Sub Header + 3 Columns (1fr, 2fr, 1fr)
+- 각 하위 섹션에 표준 스타일링 적용:
+  - 배경색과 헤더 텍스트에 '|' 접두사
+  - 오렌지색 하이라이트 (기존 설정 페이지와 동일)
+- 반응형: 1024px 이하에서 세로 스택으로 전환
+- 화면 높이 기준 레이아웃 (화면을 벗어나지 않음)
+
+## 백엔드 개발 정책
+
+### 아키텍처 구조
+- FastAPI 기반 계층형 아키텍처
+- 의존성 방향: API → Service → Core → Models → Utils
+- 모듈화된 구조로 확장성과 유지보수성 보장
+
+### 폴더 구조
+```
+backend/
+├── app/                 # 메인 애플리케이션 설정
+├── api/v1/endpoints/    # API 엔드포인트
+├── core/               # 핵심 비즈니스 로직
+│   ├── pdf_processor/   # PDF 처리 엔진
+│   ├── table_extractor/ # 테이블 추출 로직
+│   └── relationship_manager/ # 관계 설정 관리
+├── models/             # 데이터 모델 (Pydantic)
+├── services/           # 서비스 레이어
+├── utils/              # 공통 유틸리티
+├── storage/            # 저장소 관리
+└── tests/              # 테스트 코드
+```
+
+### 코딩 표준
+- Type Hints 필수 사용
+- Google 스타일 Docstring 작성
+- snake_case (함수, 변수, 파일명)
+- PascalCase (클래스명)
+- UPPER_SNAKE_CASE (상수)
+- 단일 책임 원칙 준수
+- 의존성 주입 패턴 활용
+
+## 코드 변경 시 필수 검토 사항
+
+### 영향도 분석 절차
+1. 변경될 변수/함수/클래스가 다른 코드에서 호출되는지 codebase_search로 확인
+2. 변경으로 인한 영향을 받는 곳이 없는지 grep으로 검토
+3. 검토 결과를 사용자에게 보고 후 수정 결정
+4. 변경 전 커밋 및 푸시 (사용자 허가 시에만)
+
+### 작업 후 검증
+1. 린터 에러 유무 체크 및 보고 (read_lints 사용)
+2. 최소한의 수정으로 작업 마무리
+3. 코드 품질 검증
+
+## 파일 관리 정책
+
+### 고유 키 정책
+- 중복 고객명 구별 키: `mkt_uuid` (전화번호 대신 사용)
+
+### 백업 및 버전 관리
+- 변경 전 커밋 및 푸시 (사용자 허가 시에만)
+- 무단 커밋 절대 금지
+
+### 문서 관리
+- 기존 마크다운 문서 파일 업데이트 (새로 생성하지 않음)
+- `documents/` 폴더에 체계적으로 정리
+
+## 성능 및 자동화
+
+### 서버 관리
+- Python 백엔드 서버 자동 재로드 (pm2 reload 방식 선호)
+- 수동 재시작 최소화
+
+### 코드 최적화
+- DRY 원칙 준수 (중복 코드 제거)
+- 모듈화를 통한 재사용성 향상
+- 단일 책임 원칙 준수
+
+## 절대 금지 사항
+- 이모티콘 사용 (📊, 🎯, ⚙️, 💾, 📄, 📁 등 모든 유니코드 이모티콘)
+- 비승인 색상 하드코딩 (#123456, rgb(), hsl() 등)
+- CSS 변수 외의 색상 사용
+- 임의의 크기/간격 값 사용
+- 의미 추측 기반 코드 분석
+- 실제 코드 외 상상으로 답변
+
+## 품질 기준
+- 코드 변경 시 3회 이상 린터 에러 수정 루프 금지
+- 3번째 시도에서 중단하고 사용자에게 문의
+- 교육받지 않은 추측성 수정 금지
+- 모든 색상은 var(--color-*) 형태로만 사용
+
+## 모듈화 가이드라인
+### 파일 크기 기준
+- 1,000줄 이상: 반드시 분해 필요
+- 500줄 이상: 분해 검토 권장
+- 200줄 이상: 기능별 분리 고려
+
+### 분해 우선순위
+1. 가장 큰 기능 블록 (500줄 이상)
+2. 독립적인 기능 (다른 코드와 의존성 적음)
+3. 재사용 가능한 로직 (여러 곳에서 사용)
+4. UI 섹션 (명확한 경계가 있는 부분)
+
+## 스크립트 관리 정책
+
+### 개발 환경 스크립트
+- 개발 환경 시작: `./scripts/start_dev.sh`
+- 개발 환경 중지: `./scripts/stop_dev.sh`
+- 백엔드 개별 관리: `./scripts/backend_service.sh {start|stop|restart|status|logs}`
+- 프론트엔드 개별 관리: `./scripts/frontend_service.sh {start|stop|restart|status|logs}`
+
+### 스크립트 구조
+```
+scripts/
+├── start_dev.sh       # 통합 개발 환경 시작
+├── stop_dev.sh        # 통합 개발 환경 중지
+├── backend_service.sh # 백엔드 서비스 관리
+├── frontend_service.sh # 프론트엔드 서비스 관리
+└── README.md          # 스크립트 사용 가이드
+```
+
+### 스크립트 실행 환경
+- macOS: Terminal 앱의 새 탭 사용
+- Linux: gnome-terminal 사용
+- tmux: 세션 기반 분할 터미널
+- 각 서비스는 별도 터미널에서 실시간 로그 표시
+
+## 정책 위반 방지 체크리스트
+
+### 🚨 코드 작성 전 필수 확인사항
+1. **색상 사용 시**:
+   - CSS 변수만 사용 (var(--color-*))
+   - 하드코딩된 색상값 절대 금지 (#123456, rgb(), hsl() 등)
+   - 09_color_system_specification.md의 승인된 색상만 사용
+
+2. **이모티콘 사용 금지**:
+   - UI 텍스트에서 모든 이모티콘 제거
+   - 콘솔 로그에서 이모티콘 대신 [CATEGORY] 형식 사용
+   - 아이콘 필요 시 SVG 또는 텍스트 사용
+
+3. **API 엔드포인트 확인**:
+   - 프론트엔드 API 호출 URL이 백엔드 라우터와 일치하는지 확인
+   - 요청/응답 모델이 Pydantic 모델과 일치하는지 확인
+   - 에러 처리가 일관되게 구현되어 있는지 확인
+
+### 🔍 코드 작성 후 필수 검증사항
+1. **린터 에러 확인**: read_lints 도구로 에러 0개 유지
+2. **영향도 분석**: codebase_search와 grep으로 변경 영향 확인
+3. **정책 준수**: 디자인 토큰, 색상 시스템, 명명 규칙 준수
+
+### 🚫 절대 실수하지 말아야 할 사항
+- 하드코딩된 색상: style={{backgroundColor: '#FF0000'}}
+- 인라인 이모티콘: console.log('📊 데이터:', data)
+- 비승인 색상: background: #custom-color
+- API 엔드포인트 불일치: 프론트엔드 /api/v1/wrong vs 백엔드 /api/v1/correct
+
+### 📋 자주 실수하는 파일들
+- ExamTypeIndicator.js: 하드코딩된 색상 주의
+- design-tokens.css: 색상 명세서와 일치 확인
+- API 서비스 파일: 엔드포인트 경로 정확성 확인
+- 콘솔 로그: 이모티콘 대신 [CATEGORY] 형식 사용
+
+이 규칙들을 따라 일관성 있고 고품질의 코드를 작성하며, 프로젝트의 아키텍처와 정책을 준수하세요.

@@ -11,6 +11,7 @@ from pathlib import Path
 
 from models.analysis_models import TableData, ExtractionLibrary
 from core.pdf_processor.factory import PDFProcessorFactory
+from services.ai_extraction_service import ai_extraction_service, AIExtractionRequest
 
 logger = logging.getLogger(__name__)
 
@@ -285,37 +286,78 @@ class ExtractionService:
                             
                         cell_text = cell_value.strip()
                         
-                        # 각 키에 대해 매칭 확인
+                        # 각 키에 대해 매칭 확인 (정확한 매칭 우선)
                         matched = False
                         for key_name, patterns in key_mapping_db.items():
                             for pattern in patterns:
-                                if pattern.lower() in cell_text.lower():
-                                    logger.info(f"키 매칭 발견: '{pattern}' -> '{key_name}' (셀: '{cell_text}')")
+                                # 정확한 매칭 우선 (공백 제거 후 비교)
+                                cell_clean = cell_text.strip().lower()
+                                pattern_clean = pattern.strip().lower()
+                                
+                                # 1. 정확한 매칭 (높은 신뢰도)
+                                if cell_clean == pattern_clean:
+                                    confidence = 0.95
+                                    match_type = "exact"
+                                # 2. 시작 부분 매칭 (중간 신뢰도)
+                                elif cell_clean.startswith(pattern_clean):
+                                    confidence = 0.8
+                                    match_type = "prefix"
+                                # 3. 끝 부분 매칭 (중간 신뢰도)
+                                elif cell_clean.endswith(pattern_clean):
+                                    confidence = 0.7
+                                    match_type = "suffix"
+                                # 4. 부분 매칭 (낮은 신뢰도, 단어 경계 고려)
+                                elif pattern_clean in cell_clean and len(pattern_clean) >= 3:
+                                    # 단어 경계 확인 (공백, 괄호, 특수문자 등)
+                                    import re
+                                    word_boundary_pattern = r'\b' + re.escape(pattern_clean) + r'\b'
+                                    if re.search(word_boundary_pattern, cell_clean):
+                                        confidence = 0.6
+                                        match_type = "word_boundary"
+                                    else:
+                                        confidence = 0.4
+                                        match_type = "partial"
+                                else:
+                                    continue
+                                
+                                # 신뢰도 임계값 확인 (0.4 이상만 허용)
+                                if confidence >= 0.4:
+                                    logger.info(f"키 매칭 발견: '{pattern}' -> '{key_name}' (셀: '{cell_text}', 타입: {match_type}, 신뢰도: {confidence})")
                                     
                                     # 인식된 키 정보 생성
+                                    import time
+                                    unique_id = f"{key_name}_{table.page_number}_{row_idx}_{col_idx}_{int(time.time() * 1000000)}_{len(recognized_keys)}"
                                     recognized_key = {
+                                        "id": unique_id,  # 고유 ID 추가
                                         "key": key_name,
-                                        "anchor_text": cell_text,
-                                        "page_number": table.page_number,
-                                        "row": row_idx,
-                                        "col": col_idx,
-                                        "confidence": 0.8,  # 기본 신뢰도
-                                        "suggested_position": {
+                                        "key_label": key_name,  # 표시용 라벨
+                                        "anchor_cell": {
+                                            "text": cell_text,
+                                            "page_number": table.page_number,
+                                            "row": row_idx,
+                                            "col": col_idx
+                                        },
+                                        "value_cell": {
+                                            "page_number": table.page_number,
                                             "row": row_idx + 1,  # 다음 행 제안
                                             "col": col_idx
-                                        }
+                                        },
+                                        "relative_position": "next_row",
+                                        "table_id": f"table_{table.page_number}_{row_idx}",
+                                        "confidence": confidence,
+                                        "match_type": match_type
                                     }
                                     
                                     # 중복 제거
                                     if not any(
                                         rk["key"] == key_name and 
-                                        rk["page_number"] == table.page_number and
-                                        rk["row"] == row_idx and 
-                                        rk["col"] == col_idx
+                                        rk["anchor_cell"]["page_number"] == table.page_number and
+                                        rk["anchor_cell"]["row"] == row_idx and 
+                                        rk["anchor_cell"]["col"] == col_idx
                                         for rk in recognized_keys
                                     ):
                                         recognized_keys.append(recognized_key)
-                                        logger.info(f"새 키 추가: {key_name} (페이지 {table.page_number}, 행 {row_idx}, 열 {col_idx})")
+                                        logger.info(f"새 키 추가: {key_name} (페이지 {table.page_number}, 행 {row_idx}, 열 {col_idx}, 신뢰도: {confidence})")
                                     matched = True
                                     break
                             if matched:
@@ -446,3 +488,118 @@ class ExtractionService:
                 
         except Exception as e:
             logger.error(f"새 키 저장 실패: {e}")
+    
+    async def recognize_keys_with_ai(
+        self, 
+        file_path: str, 
+        processor_type: str = "pdfplumber"
+    ) -> Dict[str, Any]:
+        """
+        키 인식 후 AI를 사용하여 값을 자동 추출
+        
+        Args:
+            file_path: PDF 파일 경로
+            processor_type: PDF 처리기 타입
+            
+        Returns:
+            Dict: 키 인식 및 AI 추출 결과
+        """
+        try:
+            # 1단계: 기존 키 인식 실행
+            recognition_result = await self.recognize_keys(file_path, processor_type)
+            
+            if not recognition_result.get('success') or not recognition_result.get('recognized_keys'):
+                return recognition_result
+            
+            # 2단계: AI 서비스 사용 가능 여부 확인
+            if not ai_extraction_service.is_available():
+                logger.warning("AI 서비스가 사용할 수 없습니다. 기본 키 인식 결과만 반환합니다.")
+                return recognition_result
+            
+            # 3단계: 테이블 데이터 가져오기
+            tables = await self.extract_tables(file_path, processor_type)
+            if not tables:
+                logger.warning("테이블 데이터를 찾을 수 없습니다.")
+                return recognition_result
+            
+            # 4단계: AI 추출 요청 생성
+            ai_requests = []
+            for key_data in recognition_result['recognized_keys']:
+                # 해당 키의 테이블 찾기
+                target_table = None
+                for table in tables:
+                    if (table.page_number == key_data.get('anchor_cell', {}).get('page_number', 1) and
+                        table.data and len(table.data) > key_data.get('anchor_cell', {}).get('row', 0)):
+                        target_table = table
+                        break
+                
+                if target_table:
+                    ai_request = AIExtractionRequest(
+                        key_name=key_data['key'],
+                        key_label=key_data.get('key_label', key_data['key']),
+                        anchor_cell=key_data['anchor_cell'],
+                        table_data=target_table.data,
+                        page_number=target_table.page_number,
+                        context=f"파일: {Path(file_path).name}"
+                    )
+                    ai_requests.append(ai_request)
+            
+            # 5단계: AI 추출 실행
+            if ai_requests:
+                ai_results = await ai_extraction_service.batch_extract_values(ai_requests)
+                
+                # 6단계: 결과 통합
+                enhanced_keys = []
+                for key_data in recognition_result['recognized_keys']:
+                    # 해당 키의 AI 결과 찾기
+                    ai_result = None
+                    for result in ai_results:
+                        if result and result.key_name == key_data['key']:
+                            ai_result = result
+                            break
+                    
+                    if ai_result and ai_result.confidence >= 0.7:
+                        # AI 추출 성공 - 값 업데이트
+                        enhanced_key = key_data.copy()
+                        enhanced_key['ai_extracted_value'] = ai_result.extracted_value
+                        enhanced_key['ai_confidence'] = ai_result.confidence
+                        enhanced_key['ai_reasoning'] = ai_result.reasoning
+                        enhanced_key['ai_processing_time'] = ai_result.processing_time
+                        enhanced_key['is_ai_enhanced'] = True
+                        
+                        # suggested_position 업데이트
+                        if 'suggested_position' in enhanced_key:
+                            enhanced_key['suggested_position'] = {
+                                'row': ai_result.suggested_position['row'],
+                                'col': ai_result.suggested_position['col']
+                            }
+                        
+                        enhanced_keys.append(enhanced_key)
+                        logger.info(f"AI 추출 성공: {key_data['key']} -> {ai_result.extracted_value} (신뢰도: {ai_result.confidence:.2f})")
+                    else:
+                        # AI 추출 실패 - 기본 결과 사용
+                        enhanced_key = key_data.copy()
+                        enhanced_key['is_ai_enhanced'] = False
+                        enhanced_keys.append(enhanced_key)
+                        logger.warning(f"AI 추출 실패: {key_data['key']} (신뢰도: {ai_result.confidence if ai_result else 0:.2f})")
+                else:
+                    enhanced_keys = recognition_result['recognized_keys']
+                
+                # 7단계: 최종 결과 반환
+                final_result = recognition_result.copy()
+                final_result['recognized_keys'] = enhanced_keys
+                final_result['ai_enhanced'] = True
+                final_result['ai_successful_extractions'] = len([k for k in enhanced_keys if k.get('is_ai_enhanced', False)])
+                final_result['ai_total_attempts'] = len(ai_requests)
+                
+                logger.info(f"AI 향상된 키 인식 완료: {final_result['ai_successful_extractions']}/{final_result['ai_total_attempts']} 성공")
+                return final_result
+            
+            else:
+                logger.warning("AI 추출 요청을 생성할 수 없습니다.")
+                return recognition_result
+                
+        except Exception as e:
+            logger.error(f"AI 향상된 키 인식 실패: {e}")
+            # AI 실패 시 기본 키 인식 결과 반환
+            return await self.recognize_keys(file_path, processor_type)

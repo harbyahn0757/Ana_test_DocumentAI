@@ -116,25 +116,13 @@ start_frontend() {
     
     log_success "포트 $FRONTEND_PORT이 정리되었습니다. 서버 시작 중..."
     
-    # 프론트엔드 서버 시작 (백그라운드)
-    PORT=$FRONTEND_PORT npm start > "../$FRONTEND_LOG_FILE" 2> "../$FRONTEND_ERROR_LOG_FILE" &
-    FRONTEND_PID=$!
+    # 프론트엔드 서버 시작 (실시간 로그)
+    log_info "프론트엔드 서버 시작 중... (실시간 로그 출력)"
+    log_info "종료하려면 Ctrl+C를 누르세요"
+    echo "----------------------------------------"
     
-    # PID 파일 생성
-    echo $FRONTEND_PID > "../$FRONTEND_PID_FILE"
-    
-    # 서버 시작 확인
-    sleep 5
-    if check_port $FRONTEND_PORT; then
-        log_success "프론트엔드 서버가 시작되었습니다 (PID: $FRONTEND_PID)"
-        log_info "로그: $FRONTEND_LOG_FILE"
-        log_info "에러 로그: $FRONTEND_ERROR_LOG_FILE"
-        log_success "서버가 정상적으로 실행 중입니다"
-        log_info "접속 URL: http://localhost:$FRONTEND_PORT"
-    else
-        log_error "프론트엔드 서버 시작에 실패했습니다."
-        exit 1
-    fi
+    # 실시간 로그와 함께 서버 시작
+    PORT=$FRONTEND_PORT npm start
 }
 
 # 프론트엔드 중지 함수

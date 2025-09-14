@@ -24,6 +24,18 @@ from utils.logging_config import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
+# 설정 파일에서 OpenAI API 키 등 로드
+import os
+config_path = os.path.join(os.path.dirname(__file__), "..", "config.json")
+logger.info(f"설정 파일 경로: {config_path}")
+logger.info(f"설정 파일 존재 여부: {os.path.exists(config_path)}")
+settings.load_config_from_json(config_path)
+logger.info(f"OpenAI API 키 로드됨: {settings.openai_api_key is not None}")
+if settings.openai_api_key:
+    logger.info(f"API 키 길이: {len(settings.openai_api_key)}")
+else:
+    logger.warning("OpenAI API 키가 로드되지 않았습니다")
+
 # FastAPI 앱 인스턴스 생성
 app = FastAPI(
     title="건강검진 데이터 추출 시스템",

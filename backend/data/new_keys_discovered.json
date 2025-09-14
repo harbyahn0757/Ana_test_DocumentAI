@@ -265,8 +265,134 @@
       "category": "special",
       "discovered_at": "2025-09-07T23:22:52.852176",
       "file_path": "documents/example"
+    },
+    {
+      "key_name": "이웅용",
+      "anchor_text": "이웅용",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.136145",
+      "file_path": null
+    },
+    {
+      "key_name": "남성",
+      "anchor_text": "남성",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.137190",
+      "file_path": null
+    },
+    {
+      "key_name": "창원파티마병원",
+      "anchor_text": "창원파티마병원",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.138986",
+      "file_path": null
+    },
+    {
+      "key_name": "종합 병원",
+      "anchor_text": "종합 병원",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.139854",
+      "file_path": null
+    },
+    {
+      "key_name": "직업환경의학센터",
+      "anchor_text": "직업환경의학센터",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.140497",
+      "file_path": null
+    },
+    {
+      "key_name": "기타",
+      "anchor_text": "기타",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.141010",
+      "file_path": null
+    },
+    {
+      "key_name": "지방사무소",
+      "anchor_text": "지방사무소",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.141449",
+      "file_path": null
+    },
+    {
+      "key_name": "해당없음",
+      "anchor_text": "해당없음",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.142966",
+      "file_path": null
+    },
+    {
+      "key_name": "진찰",
+      "anchor_text": "진찰",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.143637",
+      "file_path": null
+    },
+    {
+      "key_name": "치아",
+      "anchor_text": "치아",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.147449",
+      "file_path": null
+    },
+    {
+      "key_name": "치과의사",
+      "anchor_text": "치과의사",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.149324",
+      "file_path": null
+    },
+    {
+      "key_name": "(인)",
+      "anchor_text": "(인)",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.150113",
+      "file_path": null
+    },
+    {
+      "key_name": "CN(야간작업)",
+      "anchor_text": "CN(야간작업)",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.151552",
+      "file_path": null
+    },
+    {
+      "key_name": "DN(야간작업)",
+      "anchor_text": "DN(야간작업)",
+      "category": "special",
+      "discovered_at": "2025-09-08T22:52:13.152574",
+      "file_path": null
+    },
+    {
+      "key_name": "정상",
+      "anchor_text": "정상",
+      "category": "special",
+      "discovered_at": "2025-09-11T15:18:59.668095",
+      "file_path": null
+    },
+    {
+      "key_name": "정상 / 건강상태 양호합니다.",
+      "anchor_text": "정상 / 건강상태 양호합니다.",
+      "category": "special",
+      "discovered_at": "2025-09-11T15:18:59.674971",
+      "file_path": null
+    },
+    {
+      "key_name": "음성",
+      "anchor_text": "음성",
+      "category": "special",
+      "discovered_at": "2025-09-11T15:18:59.679818",
+      "file_path": null
+    },
+    {
+      "key_name": "약양성(±)",
+      "anchor_text": "약양성(±)",
+      "category": "special",
+      "discovered_at": "2025-09-11T15:18:59.683030",
+      "file_path": null
     }
   ],
-  "last_updated": "2025-09-07T23:22:52.852177",
-  "total_discovered": 40
+  "last_updated": "2025-09-11T15:18:59.683033",
+  "total_discovered": 56
 }

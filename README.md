@@ -48,13 +48,13 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r backend/requirements.txt
 
 # 백엔드 서버 시작 (포트 9001)
-./backend_service.sh start
+./scripts/backend_service.sh start
 ```
 
 3. **프론트엔드 서버 시작**
 ```bash
 # 프론트엔드 서버 시작 (포트 9003)
-./frontend_service.sh start
+./scripts/frontend_service.sh start
 ```
 
 4. **접속**
@@ -133,22 +133,28 @@ Ana_test_DocumentAI/
 
 ## 🔧 개발 도구
 
+### 개발 환경 통합 관리
+```bash
+./scripts/start_dev.sh        # 백엔드 + 프론트엔드 통합 시작
+./scripts/stop_dev.sh         # 모든 서비스 통합 중지
+```
+
 ### 백엔드 서비스 관리
 ```bash
-./backend_service.sh start    # 서버 시작 (포트 9001)
-./backend_service.sh stop     # 서버 중지
-./backend_service.sh restart  # 서버 재시작
-./backend_service.sh status   # 상태 확인
-./backend_service.sh logs     # 로그 확인
+./scripts/backend_service.sh start    # 서버 시작 (포트 9001)
+./scripts/backend_service.sh stop     # 서버 중지
+./scripts/backend_service.sh restart  # 서버 재시작
+./scripts/backend_service.sh status   # 상태 확인
+./scripts/backend_service.sh logs     # 로그 확인
 ```
 
 ### 프론트엔드 서비스 관리
 ```bash
-./frontend_service.sh start    # 서버 시작 (포트 9003)
-./frontend_service.sh stop     # 서버 중지
-./frontend_service.sh restart  # 서버 재시작
-./frontend_service.sh status   # 상태 확인
-./frontend_service.sh logs     # 로그 확인
+./scripts/frontend_service.sh start    # 서버 시작 (포트 9003)
+./scripts/frontend_service.sh stop     # 서버 중지
+./scripts/frontend_service.sh restart  # 서버 재시작
+./scripts/frontend_service.sh status   # 상태 확인
+./scripts/frontend_service.sh logs     # 로그 확인
 ```
 
 ### 코드 품질

@@ -63,6 +63,7 @@ async def get_new_keys(
 async def recognize_keys(
     file: UploadFile = File(...),
     processor_type: str = Form("pdfplumber"),
+    use_ai: bool = Form(False),
     error_handler = Depends(get_error_handler)
 ) -> JSONResponse:
     """
@@ -72,9 +73,10 @@ async def recognize_keys(
     Args:
         file: 업로드된 PDF 파일
         processor_type: PDF 처리기 타입 (pdfplumber, camelot, tabula)
+        use_ai: AI를 사용한 값 추출 여부
         
     Returns:
-        JSONResponse: 인식된 키 정보
+        JSONResponse: 인식된 키 정보 (AI 추출 포함)
     """
     try:
         import json
@@ -91,19 +93,31 @@ async def recognize_keys(
             # 추출 서비스 인스턴스 생성
             extraction_service = ExtractionService()
             
-            # 키 인식 수행
-            recognition_results = await extraction_service.recognize_keys(
-                file_path=temp_file_path,
-                processor_type=processor_type
-            )
+            # 키 인식 수행 (AI 옵션에 따라)
+            if use_ai:
+                recognition_results = await extraction_service.recognize_keys_with_ai(
+                    file_path=temp_file_path,
+                    processor_type=processor_type
+                )
+            else:
+                recognition_results = await extraction_service.recognize_keys(
+                    file_path=temp_file_path,
+                    processor_type=processor_type
+                )
             
-            logger.info(f"키 인식 완료: {len(recognition_results.get('recognized_keys', []))}개 키 발견")
+            # 로그 메시지 업데이트
+            if use_ai and recognition_results.get('ai_enhanced'):
+                ai_success = recognition_results.get('ai_successful_extractions', 0)
+                ai_total = recognition_results.get('ai_total_attempts', 0)
+                logger.info(f"AI 향상된 키 인식 완료: {len(recognition_results.get('recognized_keys', []))}개 키 발견, AI 추출: {ai_success}/{ai_total} 성공")
+            else:
+                logger.info(f"키 인식 완료: {len(recognition_results.get('recognized_keys', []))}개 키 발견")
             
             return JSONResponse(
                 status_code=200,
                 content={
                     "success": True,
-                    "message": "키 인식이 완료되었습니다",
+                    "message": "AI 향상된 키 인식이 완료되었습니다" if use_ai else "키 인식이 완료되었습니다",
                     "data": recognition_results
                 }
             )
@@ -192,6 +206,86 @@ async def extract_data(
         logger.error(f"데이터 추출 실패: {str(e)}")
         raise HTTPException(status_code=500, detail=f"데이터 추출 중 오류가 발생했습니다: {str(e)}")
 
+
+@router.get("/key-database")
+async def get_key_database(
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
+    """
+    키 데이터베이스 조회
+    """
+    try:
+        import json
+        import os
+        
+        # 키 매핑 데이터베이스 파일 경로
+        key_db_file = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data', 'key_mapping_database.json')
+        
+        if os.path.exists(key_db_file):
+            with open(key_db_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        else:
+            data = {
+                "basic": {},
+                "special": {}
+            }
+        
+        return JSONResponse(
+            status_code=200,
+            content=data
+        )
+        
+    except Exception as e:
+        logger.error(f"키 데이터베이스 조회 실패: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": f"키 데이터베이스 조회 실패: {str(e)}"
+            }
+        )
+
+@router.post("/key-database")
+async def save_key_database(
+    key_database: dict,
+    error_handler = Depends(get_error_handler)
+) -> JSONResponse:
+    """
+    키 데이터베이스 저장
+    """
+    try:
+        import json
+        import os
+        
+        # 키 매핑 데이터베이스 파일 경로
+        key_db_file = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'data', 'key_mapping_database.json')
+        
+        # 디렉토리가 없으면 생성
+        os.makedirs(os.path.dirname(key_db_file), exist_ok=True)
+        
+        # 데이터 저장
+        with open(key_db_file, 'w', encoding='utf-8') as f:
+            json.dump(key_database, f, ensure_ascii=False, indent=2)
+        
+        logger.info(f"키 데이터베이스 저장 완료: {len(key_database.get('basic', {}))}개 기본 키, {len(key_database.get('special', {}))}개 특수 키")
+        
+        return JSONResponse(
+            status_code=200,
+            content={
+                "success": True,
+                "message": "키 데이터베이스가 성공적으로 저장되었습니다"
+            }
+        )
+        
+    except Exception as e:
+        logger.error(f"키 데이터베이스 저장 실패: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": f"키 데이터베이스 저장 실패: {str(e)}"
+            }
+        )
 
 @router.post("/quick-test")
 async def quick_test(

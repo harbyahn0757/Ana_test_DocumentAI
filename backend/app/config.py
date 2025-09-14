@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import List, Optional
 from datetime import datetime
 import os
+import json
 
 
 class Settings(BaseSettings):
@@ -178,6 +179,46 @@ class Settings(BaseSettings):
         description="신뢰도 증가를 위한 최소 열 수"
     )
     
+    # ===== AI 설정 =====
+    openai_api_key: Optional[str] = Field(
+        default=None,
+        description="OpenAI API 키"
+    )
+    openai_model: str = Field(
+        default="gpt-4o-mini",
+        description="OpenAI 모델명"
+    )
+    openai_max_tokens: int = Field(
+        default=2000,
+        description="OpenAI 최대 토큰 수"
+    )
+    openai_temperature: float = Field(
+        default=0.1,
+        description="OpenAI 온도 설정"
+    )
+    openai_timeout: int = Field(
+        default=30,
+        description="OpenAI API 타임아웃 (초)"
+    )
+    
+    # AI 추출 설정
+    ai_confidence_threshold: float = Field(
+        default=0.7,
+        description="AI 추출 신뢰도 임계값"
+    )
+    ai_max_retries: int = Field(
+        default=3,
+        description="AI API 최대 재시도 횟수"
+    )
+    ai_retry_delay: float = Field(
+        default=1.0,
+        description="AI API 재시도 지연 시간 (초)"
+    )
+    ai_enable_fallback: bool = Field(
+        default=True,
+        description="AI 실패 시 폴백 활성화"
+    )
+    
     @validator('upload_dir', 'cache_dir', 'storage_dir', 'samples_dir')
     def create_directories(cls, v):
         """디렉토리가 존재하지 않으면 생성"""
@@ -211,6 +252,36 @@ class Settings(BaseSettings):
             files.extend(self.samples_dir.glob(f"*{ext}"))
         
         return [f.name for f in files]
+    
+    def load_config_from_json(self, config_path: str = "config.json") -> None:
+        """JSON 설정 파일에서 OpenAI API 키 등 설정 로드"""
+        try:
+            config_file = Path(config_path)
+            if config_file.exists():
+                with open(config_file, 'r', encoding='utf-8') as f:
+                    config_data = json.load(f)
+                
+                # OpenAI 설정 로드
+                if 'openai' in config_data:
+                    openai_config = config_data['openai']
+                    self.openai_api_key = openai_config.get('api_key')
+                    self.openai_model = openai_config.get('model', self.openai_model)
+                    self.openai_max_tokens = openai_config.get('max_tokens', self.openai_max_tokens)
+                    self.openai_temperature = openai_config.get('temperature', self.openai_temperature)
+                    self.openai_timeout = openai_config.get('timeout', self.openai_timeout)
+                
+                # AI 추출 설정 로드
+                if 'ai_extraction' in config_data:
+                    ai_config = config_data['ai_extraction']
+                    self.ai_confidence_threshold = ai_config.get('confidence_threshold', self.ai_confidence_threshold)
+                    self.ai_max_retries = ai_config.get('max_retries', self.ai_max_retries)
+                    self.ai_retry_delay = ai_config.get('retry_delay', self.ai_retry_delay)
+                    self.ai_enable_fallback = ai_config.get('enable_fallback', self.ai_enable_fallback)
+                    
+        except Exception as e:
+            print(f"설정 파일 로드 실패: {e}")
+            # 환경변수에서 API 키 로드 시도
+            self.openai_api_key = os.getenv('OPENAI_API_KEY')
     
     def get_absolute_samples_dir(self) -> Path:
         """샘플 디렉토리의 절대 경로 반환"""
