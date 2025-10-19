@@ -219,6 +219,10 @@ class Settings(BaseSettings):
         description="AI 실패 시 폴백 활성화"
     )
     
+    def model_post_init(self, __context) -> None:
+        """모델 초기화 후 JSON 설정 파일 로드"""
+        self.load_config_from_json()
+    
     @validator('upload_dir', 'cache_dir', 'storage_dir', 'samples_dir')
     def create_directories(cls, v):
         """디렉토리가 존재하지 않으면 생성"""
@@ -256,7 +260,11 @@ class Settings(BaseSettings):
     def load_config_from_json(self, config_path: str = "config.json") -> None:
         """JSON 설정 파일에서 OpenAI API 키 등 설정 로드"""
         try:
-            config_file = Path(config_path)
+            # 상대 경로인 경우 현재 파일 위치 기준으로 설정
+            if not Path(config_path).is_absolute():
+                config_file = Path(__file__).parent.parent / config_path
+            else:
+                config_file = Path(config_path)
             if config_file.exists():
                 with open(config_file, 'r', encoding='utf-8') as f:
                     config_data = json.load(f)

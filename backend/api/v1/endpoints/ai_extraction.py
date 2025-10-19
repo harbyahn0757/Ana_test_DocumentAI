@@ -164,14 +164,14 @@ async def extract_values_with_ai(
                     "processing_time": result.processing_time,
                     "model_used": result.model_used,
                     "anchor_cell": {
-                        "row": original_key.get('anchor_cell', {}).get('row', 0),
-                        "col": original_key.get('anchor_cell', {}).get('col', 0),
-                        "value": original_key.get('anchor_cell', {}).get('text', result.key_name),
+                        "row": original_key.get('anchor_cell', {}).get('row', 0) if original_key else 0,
+                        "col": original_key.get('anchor_cell', {}).get('col', 0) if original_key else 0,
+                        "value": original_key.get('anchor_cell', {}).get('text', result.key_name) if original_key else result.key_name,
                         "page_number": request.page_number
                     },
                     "value_cell": {
-                        "row": original_key.get('anchor_cell', {}).get('row', 0) + result.suggested_position["row"],
-                        "col": original_key.get('anchor_cell', {}).get('col', 0) + result.suggested_position["col"],
+                        "row": (original_key.get('anchor_cell', {}).get('row', 0) if original_key else 0) + result.suggested_position["row"],
+                        "col": (original_key.get('anchor_cell', {}).get('col', 0) if original_key else 0) + result.suggested_position["col"],
                         "value": result.extracted_value,
                         "page_number": request.page_number
                     },

@@ -10,11 +10,10 @@ import os
 from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass
 from pydantic import BaseModel
-import openai
-from openai import AsyncOpenAI
 import time
 
 from app.config import settings
+from core.base_ai_service import BaseAIService
 
 logger = logging.getLogger(__name__)
 
@@ -41,29 +40,39 @@ class AIExtractionResult(BaseModel):
     model_used: str = ""
 
 
-class AIExtractionService:
+class AIHeaderAnalysisResult(BaseModel):
+    """AI 헤더 분석 결과"""
+    column_mappings: Dict[int, str]  # {col_index: field_type}
+    row_mappings: Dict[int, str] = {}  # {row_index: field_type} - 세로 헤더용
+    table_structure: str = "horizontal"  # "horizontal", "vertical", "mixed"
+    header_orientation: str = "top"  # "top", "left", "both", "mixed"
+    confidence: float
+    reasoning: str
+    detected_fields: List[str]
+    table_analysis: str = ""  # 테이블 구조 분석 설명
+    processing_time: float = 0.0
+    model_used: str = ""
+
+
+class AIExtractionService(BaseAIService):
     """AI 기반 값 추출 서비스"""
     
     def __init__(self):
-        self.client = None
-        self._initialized = False
+        super().__init__("AI값추출서비스")
     
-    def _initialize_client(self):
-        """OpenAI 클라이언트 초기화"""
-        try:
-            # API 키 확인 (환경변수 우선, 설정 파일 차선)
-            api_key = os.getenv('OPENAI_API_KEY') or settings.openai_api_key
-            
-            if not api_key:
-                logger.warning("OpenAI API 키가 설정되지 않았습니다.")
-                return
-            
-            self.client = AsyncOpenAI(api_key=api_key)
-            logger.info("OpenAI 클라이언트가 초기화되었습니다.")
-            
-        except Exception as e:
-            logger.error(f"OpenAI 클라이언트 초기화 실패: {e}")
-            self.client = None
+    async def _validate_initialization(self) -> bool:
+        """초기화 검증"""
+        return self._initialized
+    
+    def is_available(self) -> bool:
+        """
+        AI 서비스 사용 가능 여부 확인 (호환성 메서드)
+        
+        Returns:
+            bool: AI 서비스 사용 가능 여부
+        """
+        return self.is_ai_available
+    
     
     async def extract_value(self, request: AIExtractionRequest) -> Optional[AIExtractionResult]:
         """
@@ -75,24 +84,31 @@ class AIExtractionService:
         Returns:
             AIExtractionResult: 추출 결과 또는 None
         """
-        if not self.client:
-            logger.error("OpenAI 클라이언트가 초기화되지 않았습니다.")
+        if not self.is_ai_available:
+            self.log_error("AI 서비스가 사용 불가능합니다")
             return None
         
         start_time = time.time()
         
         try:
-            # 프롬프트 생성
-            prompt = self._create_extraction_prompt(request)
+            # AI 호출
+            ai_result = await self.call_ai_with_prompt(
+                "value_extraction",
+                key_label=request.key_label,
+                key_name=request.key_name,
+                anchor_row=request.anchor_cell.get('row', 'N/A'),
+                anchor_col=request.anchor_cell.get('col', 'N/A'),
+                anchor_text=request.anchor_cell.get('value', 'N/A'),
+                key_specific_instructions=self.prompt_manager.get_key_specific_instructions(request.key_name),
+                page_number=request.page_number,
+                table_data=self._format_table_data(request.table_data, request.anchor_cell)
+            )
             
-            # OpenAI API 호출
-            response = await self._call_openai_api(prompt)
-            
-            if not response:
+            if not ai_result:
                 return None
             
             # 응답 파싱
-            result = self._parse_ai_response(response, request.key_name)
+            result = self._parse_ai_dict_response(ai_result, request.key_name)
             
             if result:
                 result.processing_time = time.time() - start_time
@@ -115,136 +131,10 @@ class AIExtractionService:
         
         return None
     
-    def _create_extraction_prompt(self, request: AIExtractionRequest) -> str:
-        """AI 추출을 위한 프롬프트 생성"""
-        
-        # 테이블 데이터를 문자열로 변환
-        table_str = self._format_table_data(request.table_data, request.anchor_cell)
-        
-        # 키별 특화 지시사항 생성
-        key_specific_instructions = self._get_key_specific_instructions(request.key_name, request.key_label)
-        
-        prompt = f"""
-당신은 의료 검진 보고서에서 특정 키에 대한 값을 정확하게 추출하는 AI입니다.
-
-## 작업 지시사항
-1. 주어진 테이블 데이터에서 "{request.key_label}" ({request.key_name}) 키에 해당하는 값을 찾아주세요.
-2. 앵커 셀 위치: 행 {request.anchor_cell.get('row', 'N/A')}, 열 {request.anchor_cell.get('col', 'N/A')} - "{request.anchor_cell.get('value', 'N/A')}"
-3. 앵커 셀 근처에서 해당 키의 값을 찾아주세요.
-
-## 테이블 데이터 구조 설명
-- 테이블은 2차원 배열로 구성: data[row][col]
-- 행(row): 세로 방향 (위에서 아래로)
-- 열(col): 가로 방향 (왼쪽에서 오른쪽으로)
-- 앵커 셀 기준으로:
-  * 오른쪽: col + 1
-  * 왼쪽: col - 1  
-  * 아래쪽: row + 1
-  * 위쪽: row - 1
-
-{key_specific_instructions}
-
-## 테이블 데이터 (페이지 {request.page_number})
-{table_str}
-
-## 응답 형식 (JSON)
-{{
-    "extracted_value": "추출된 값 (문자열)",
-    "confidence": 0.95,
-    "reasoning": "값을 찾은 근거와 추론 과정",
-    "suggested_position": {{
-        "row": 1,
-        "col": 0
-    }}
-}}
-
-## 중요 규칙
-- extracted_value는 반드시 문자열로 반환
-- confidence는 0.0~1.0 사이의 실수
-- suggested_position은 반드시 앵커 셀 기준 상대 좌표로 반환
-  * 앵커 셀 위치: 행 {request.anchor_cell.get('row', 'N/A')}, 열 {request.anchor_cell.get('col', 'N/A')}
-  * 상대 좌표 계산: (값_행 - 앵커_행, 값_열 - 앵커_열)
-  * 예시: 앵커가 (1,15)이고 값이 (1,18)이면 상대좌표는 (0,3)
-  * 오른쪽 1칸: {{"row": 0, "col": 1}}
-  * 아래쪽 1칸: {{"row": 1, "col": 0}}
-  * 왼쪽 1칸: {{"row": 0, "col": -1}}
-  * 위쪽 1칸: {{"row": -1, "col": 0}}
-- 값을 찾을 수 없으면 extracted_value를 "NOT_FOUND"로 설정
-- confidence가 0.7 미만이면 신뢰할 수 없는 결과로 간주
-
-## 예시
-키: "신장" -> 값: "170cm" 또는 "170"
-키: "체중" -> 값: "65kg" 또는 "65"
-키: "혈압" -> 값: "120/80" 또는 "120/80mmHg"
-
-## 상대 좌표 계산 예시
-- 앵커 셀: (1, 15) "전화번호"
-- 값 셀: (1, 18) "01036595213"
-- 상대 좌표: (1-1, 18-15) = (0, 3)
-- 따라서 suggested_position: {{"row": 0, "col": 3}}
-
-이제 "{request.key_label}" 키의 값을 찾고 정확한 상대 좌표를 계산해주세요:
-"""
-        
-        # 프롬프트 콘솔 로깅
-        logger.info(f"🤖 AI 추출 프롬프트 생성:")
-        logger.info(f"   키: {request.key_name} ({request.key_label})")
-        logger.info(f"   앵커 셀: {request.anchor_cell}")
-        logger.info(f"   페이지: {request.page_number}")
-        logger.info(f"   테이블 데이터 크기: {len(request.table_data)}x{len(request.table_data[0]) if request.table_data else 0}")
-        logger.info(f"📝 생성된 프롬프트:\n{prompt}")
-        
-        return prompt
     
-    def _get_key_specific_instructions(self, key_name: str, key_label: str) -> str:
-        """키별 특화 지시사항 생성"""
-        key_lower = key_name.lower()
-        
-        if "주민등록번호" in key_name or "주민번호" in key_name or "resident" in key_lower:
-            return """
-## 주민등록번호 특화 규칙
-- 주민등록번호는 13자리 숫자 (000000-0000000 형식)
-- 앵커 셀 근처에서 숫자 패턴을 찾아주세요
-- 일반적으로 앵커 셀의 오른쪽이나 아래쪽에 위치
-- 하이픈(-)이 포함된 13자리 숫자 문자열을 찾아주세요
-- 예시: "123456-1234567", "1234561234567" (하이픈 없음)
-- 숫자만 있는 셀을 우선적으로 확인하세요
-"""
-        elif "신장" in key_name or "키" in key_name or "height" in key_lower:
-            return """
-## 신장 특화 규칙
-- 신장은 보통 cm 단위로 표시됩니다
-- 예시: "170cm", "170", "170.5cm"
-- 숫자와 cm가 함께 있는 셀을 찾아주세요
-"""
-        elif "체중" in key_name or "몸무게" in key_name or "weight" in key_lower:
-            return """
-## 체중 특화 규칙
-- 체중은 보통 kg 단위로 표시됩니다
-- 예시: "65kg", "65", "65.5kg"
-- 숫자와 kg가 함께 있는 셀을 찾아주세요
-"""
-        elif "혈압" in key_name or "blood pressure" in key_lower or "bp" in key_lower:
-            return """
-## 혈압 특화 규칙
-- 혈압은 보통 "수축기/이완기" 형식으로 표시됩니다
-- 예시: "120/80", "120/80mmHg", "120-80"
-- 슬래시(/)나 하이픈(-)으로 구분된 두 숫자를 찾아주세요
-"""
-        elif "혈당" in key_name or "glucose" in key_lower or "당뇨" in key_name:
-            return """
-## 혈당 특화 규칙
-- 혈당은 보통 mg/dl 단위로 표시됩니다
-- 예시: "100mg/dl", "100", "100.5"
-- 숫자와 mg/dl가 함께 있는 셀을 찾아주세요
-"""
-        else:
-            return """
-## 일반 규칙
-- 앵커 셀 근처에서 관련된 값을 찾아주세요
-- 숫자, 단위, 특수문자가 포함된 셀을 확인하세요
-- 빈 셀이 아닌 실제 값이 있는 셀을 찾아주세요
-"""
+    async def _get_key_specific_instructions(self, key_name: str, key_label: str) -> str:
+        """키별 특화 지시사항 생성 (프롬프트 매니저 사용)"""
+        return self.prompt_manager.get_key_specific_instructions(key_name)
     
     def _format_table_data(self, table_data: List[List[str]], anchor_cell: Dict[str, Any]) -> str:
         """테이블 데이터를 읽기 쉬운 형태로 포맷팅"""
@@ -289,49 +179,80 @@ class AIExtractionService:
         
         return formatted_table
     
-    async def _call_openai_api(self, prompt: str) -> Optional[str]:
-        """OpenAI API 호출"""
-        for attempt in range(settings.ai_max_retries):
-            try:
-                logger.info(f"🚀 OpenAI API 호출 시작 (시도 {attempt + 1}/{settings.ai_max_retries})")
+    async def _call_openai_api(self, system_prompt: str, user_prompt: str, model_settings: Optional[dict] = None) -> Optional[str]:
+        """AI 클라이언트를 통한 API 호출"""
+        try:
+            # 기본 모델 설정
+            default_settings = {
+                'model': settings.openai_model,
+                'max_tokens': settings.openai_max_tokens,
+                'temperature': settings.openai_temperature,
+                'response_format': {"type": "json_object"}
+            }
+            
+            # 사용자 설정 병합
+            if model_settings:
+                default_settings.update(model_settings)
+            
+            # AI 클라이언트를 통해 호출
+            result = await self.ai_client.call_ai_with_json_response(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                model_settings=default_settings
+            )
+            
+            # 에러 확인
+            if 'error' in result:
+                logger.error(f"❌ AI 클라이언트 호출 실패: {result['error']}")
+                return None
+            
+            # 메타데이터 로깅
+            if '_metadata' in result:
+                metadata = result['_metadata']
+                logger.info(f"🤖 AI 응답 메타데이터:")
+                logger.info(f"   토큰 사용량: {metadata.get('usage', {}).get('total_tokens', 'N/A')}")
+                logger.info(f"   응답 시간: {metadata.get('response_time', 'N/A')}초")
+                logger.info(f"   모델: {metadata.get('model', 'N/A')}")
+            
+            # 원본 응답 반환 (JSON 파싱 전)
+            return result.get('_metadata', {}).get('original_content', json.dumps(result))
                 
-                response = await self.client.chat.completions.create(
-                    model=settings.openai_model,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": "당신은 의료 검진 보고서 데이터 추출 전문가입니다. 정확하고 신뢰할 수 있는 값을 추출해주세요."
-                        },
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    ],
-                    max_tokens=settings.openai_max_tokens,
-                    temperature=settings.openai_temperature,
-                    response_format={"type": "json_object"}
-                )
-                
-                ai_response = response.choices[0].message.content
-                
-                # AI 응답 콘솔 로깅
-                logger.info(f"🤖 AI 응답 수신:")
-                logger.info(f"   모델: {settings.openai_model}")
-                logger.info(f"   토큰 사용량: {response.usage.total_tokens if response.usage else 'N/A'}")
-                logger.info(f"📤 AI 응답 내용:\n{ai_response}")
-                
-                return ai_response
-                
-            except Exception as e:
-                logger.warning(f"OpenAI API 호출 실패 (시도 {attempt + 1}/{settings.ai_max_retries}): {e}")
-                
-                if attempt < settings.ai_max_retries - 1:
-                    await asyncio.sleep(settings.ai_retry_delay)
-                else:
-                    logger.error("OpenAI API 호출 최종 실패")
+        except Exception as e:
+            logger.error(f"❌ AI API 호출 실패: {e}")
+            return None
+    
+    def _parse_ai_dict_response(self, response: Dict[str, Any], key_name: str) -> Optional[AIExtractionResult]:
+        """AI 딕셔너리 응답 파싱"""
+        try:
+            # 파싱된 데이터 로깅
+            logger.info(f"🔍 AI 응답 파싱 결과:")
+            logger.info(f"   키: {key_name}")
+            logger.info(f"   추출된 값: {response.get('extracted_value', 'N/A')}")
+            logger.info(f"   신뢰도: {response.get('confidence', 'N/A')}")
+            logger.info(f"   추론 과정: {response.get('reasoning', 'N/A')}")
+            logger.info(f"   제안 위치: {response.get('suggested_position', 'N/A')}")
+            
+            # 필수 필드 검증
+            required_fields = ['extracted_value', 'confidence', 'reasoning', 'suggested_position']
+            for field in required_fields:
+                if field not in response:
+                    logger.warning(f"⚠️ 필수 필드 누락: {field}")
                     return None
-        
-        return None
+            
+            # AIExtractionResult 생성
+            return AIExtractionResult(
+                key_name=key_name,
+                extracted_value=str(response['extracted_value']),
+                confidence=float(response.get('confidence', 0.0)),
+                reasoning=str(response.get('reasoning', '')),
+                suggested_position=response.get('suggested_position', {}),
+                processing_time=0.0,
+                model_used=""
+            )
+            
+        except Exception as e:
+            logger.error(f"❌ AI 응답 파싱 실패: {e}")
+            return None
     
     def _parse_ai_response(self, response: str, key_name: str) -> Optional[AIExtractionResult]:
         """AI 응답 파싱"""
@@ -402,17 +323,84 @@ class AIExtractionService:
         
         return results
     
+    async def analyze_table_headers(self, table_data: List[List[str]], anchor_key: str) -> Optional[AIHeaderAnalysisResult]:
+        """
+        AI를 사용하여 테이블 헤더 분석
+        각 열이 어떤 필드 타입(검사결과, 정상치, 판정, 소견 등)인지 자동 분류
+        
+        Args:
+            table_data: 테이블 데이터 (첫 번째 행이 헤더)
+            anchor_key: 기준 키 (예: "신장", "체중")
+            
+        Returns:
+            AIHeaderAnalysisResult: 헤더 분석 결과
+        """
+        if not self.is_available() or not table_data or len(table_data) < 1:
+            return None
+            
+        start_time = time.time()
+        
+        try:
+            self._ensure_initialized()
+            
+            # 헤더 행 추출
+            headers = table_data[0] if table_data else []
+            if not headers:
+                return None
+                
+            # 프롬프트 매니저를 통한 헤더 분석 프롬프트 생성
+            system_prompt, user_prompt, model_settings = await self.prompt_manager.build_prompt(
+                "header_analysis",
+                headers=headers,
+                anchor_key=anchor_key,
+                table_data=table_data
+            )
+            
+            # AI 클라이언트를 통한 API 호출
+            result = await self.ai_client.call_ai_with_json_response(
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                model_settings=model_settings
+            )
+            
+            # 에러 확인
+            if 'error' in result:
+                logger.error(f"❌ AI 헤더 분석 실패: {result['error']}")
+                return None
+            
+            # 결과 데이터 추출 (AI 클라이언트가 이미 JSON 파싱 완료)
+            result_data = {k: v for k, v in result.items() if not k.startswith('_')}
+            
+            processing_time = time.time() - start_time
+            
+            return AIHeaderAnalysisResult(
+                column_mappings=result_data.get("column_mappings", {}),
+                row_mappings=result_data.get("row_mappings", {}),
+                table_structure=result_data.get("table_structure", "horizontal"),
+                header_orientation=result_data.get("header_orientation", "top"),
+                confidence=result_data.get("confidence", 0.0),
+                reasoning=result_data.get("reasoning", ""),
+                detected_fields=result_data.get("detected_fields", []),
+                table_analysis=result_data.get("table_analysis", ""),
+                processing_time=processing_time,
+                model_used=settings.openai_model
+            )
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"AI 헤더 분석 응답 파싱 실패: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"AI 헤더 분석 실패: {e}")
+            return None
+    
+    
     def _ensure_initialized(self):
         """클라이언트 초기화 확인 및 실행"""
         if not self._initialized:
-            self._initialize_client()
+            # BaseAIService에서 이미 초기화됨
             self._initialized = True
     
-    def is_available(self) -> bool:
-        """AI 서비스 사용 가능 여부 확인"""
-        self._ensure_initialized()
-        api_key = os.getenv('OPENAI_API_KEY') or settings.openai_api_key
-        return self.client is not None and api_key is not None
+
 
 
 # 전역 서비스 인스턴스

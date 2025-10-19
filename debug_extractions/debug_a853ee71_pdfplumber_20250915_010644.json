@@ -1,0 +1,4915 @@
+{
+  "metadata": {
+    "file_path": "samples/합본.pdf",
+    "processor_type": "pdfplumber",
+    "extraction_timestamp": "2025-09-15T01:06:44.861577",
+    "file_hash": "a853ee71",
+    "debug_session_id": "a853ee71_20250915_010644"
+  },
+  "extraction_results": {
+    "recognized_keys": [
+      {
+        "id": "personal_1_0_0_1757866004748776_0",
+        "key": "personal",
+        "key_label": "personal",
+        "anchor_cell": {
+          "text": "주민등록번호",
+          "page_number": 1,
+          "row": 0,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 1,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_0",
+        "confidence": 0.7,
+        "match_type": "suffix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "이름",
+              "page_number": 1,
+              "row": 0,
+              "col": 4
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "나이",
+              "page_number": 1,
+              "row": 0,
+              "col": 9
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "성별",
+              "page_number": 1,
+              "row": 0,
+              "col": 14
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "사원번호",
+              "page_number": 1,
+              "row": 0,
+              "col": 18
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "근로자주소",
+              "page_number": 1,
+              "row": 1,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전화번호",
+              "page_number": 1,
+              "row": 1,
+              "col": 15
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "사업체명",
+              "page_number": 1,
+              "row": 2,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "현작업부서",
+              "page_number": 1,
+              "row": 3,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "직업환경의학센터",
+              "page_number": 1,
+              "row": 3,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "치과의사",
+              "page_number": 1,
+              "row": 13,
+              "col": 16
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "직업성 질병으로 진전될 우려가 있어 추적조사 등 관찰이 필요한 자 (직업병 요관찰자)",
+              "page_number": 1,
+              "row": 2,
+              "col": 2
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "직업성 질병의 소견을 보여 사후관리가 필요한 자 (직업병 유소견자)",
+              "page_number": 1,
+              "row": 5,
+              "col": 2
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          }
+        ],
+        "total_locations": 13,
+        "selected_location": "primary"
+      },
+      {
+        "id": "업종_1_2_8_1757866004754649_1",
+        "key": "업종",
+        "key_label": "업종",
+        "anchor_cell": {
+          "text": "업종",
+          "page_number": 1,
+          "row": 2,
+          "col": 8
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 3,
+          "col": 8
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_2",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "comprehensive_1_2_11_1757866004754682_2",
+        "key": "comprehensive",
+        "key_label": "comprehensive",
+        "anchor_cell": {
+          "text": "종합 병원",
+          "page_number": 1,
+          "row": 2,
+          "col": 11
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 3,
+          "col": 11
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_2",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "현작업내용_1_3_5_1757866004754778_3",
+        "key": "현작업내용",
+        "key_label": "현작업내용",
+        "anchor_cell": {
+          "text": "현작업내용",
+          "page_number": 1,
+          "row": 3,
+          "col": 5
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 4,
+          "col": 5
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_3",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "입사년월일_1_4_0_1757866004756599_4",
+        "key": "입사년월일",
+        "key_label": "입사년월일",
+        "anchor_cell": {
+          "text": "입사년월일",
+          "page_number": 1,
+          "row": 4,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 5,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_4",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "현직전입일_1_4_2_1757866004756751_5",
+        "key": "현직전입일",
+        "key_label": "현직전입일",
+        "anchor_cell": {
+          "text": "현직전입일",
+          "page_number": 1,
+          "row": 4,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 5,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_4",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "폭로기간_1_4_8_1757866004756955_6",
+        "key": "폭로기간",
+        "key_label": "폭로기간",
+        "anchor_cell": {
+          "text": "폭로기간",
+          "page_number": 1,
+          "row": 4,
+          "col": 8
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 5,
+          "col": 8
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_4",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "기간_1_4_8_1757866004756961_7",
+        "key": "기간",
+        "key_label": "기간",
+        "anchor_cell": {
+          "text": "폭로기간",
+          "page_number": 1,
+          "row": 4,
+          "col": 8
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 5,
+          "col": 8
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_4",
+        "confidence": 0.7,
+        "match_type": "suffix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "기간",
+              "page_number": 1,
+              "row": 5,
+              "col": 6
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "1일폭로시간_1_4_15_1757866004757221_8",
+        "key": "1일폭로시간",
+        "key_label": "1일폭로시간",
+        "anchor_cell": {
+          "text": "1일폭로시간",
+          "page_number": 1,
+          "row": 4,
+          "col": 15
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 5,
+          "col": 15
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_4",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "temporal_1_5_0_1757866004757393_9",
+        "key": "temporal",
+        "key_label": "temporal",
+        "anchor_cell": {
+          "text": "과거직력",
+          "page_number": 1,
+          "row": 5,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 6,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_5",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "과거병력",
+              "page_number": 1,
+              "row": 5,
+              "col": 12
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "현재증상",
+              "page_number": 1,
+              "row": 12,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사결과",
+              "page_number": 4,
+              "row": 0,
+              "col": 2
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전년도 검사결과",
+              "page_number": 4,
+              "row": 0,
+              "col": 4
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전전년도 검사결과",
+              "page_number": 4,
+              "row": 0,
+              "col": 5
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사결과",
+              "page_number": 5,
+              "row": 0,
+              "col": 2
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전년도 검사결과",
+              "page_number": 5,
+              "row": 0,
+              "col": 4
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전전년도 검사결과",
+              "page_number": 5,
+              "row": 0,
+              "col": 5
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          }
+        ],
+        "total_locations": 9,
+        "selected_location": "primary"
+      },
+      {
+        "id": "작업공정명_1_5_1_1757866004757500_10",
+        "key": "작업공정명",
+        "key_label": "작업공정명",
+        "anchor_cell": {
+          "text": "작업공정명",
+          "page_number": 1,
+          "row": 5,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 6,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_5",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "근무년수_1_5_3_1757866004757632_11",
+        "key": "근무년수",
+        "key_label": "근무년수",
+        "anchor_cell": {
+          "text": "근무년수",
+          "page_number": 1,
+          "row": 5,
+          "col": 3
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 6,
+          "col": 3
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_5",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "special_1_5_10_1757866004757816_12",
+        "key": "special",
+        "key_label": "special",
+        "anchor_cell": {
+          "text": "문진",
+          "page_number": 1,
+          "row": 5,
+          "col": 10
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 6,
+          "col": 10
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_5",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "치과소견",
+              "page_number": 1,
+              "row": 13,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 2,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 2,
+              "row": 0,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "사후관리소견",
+              "page_number": 2,
+              "row": 0,
+              "col": 4
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다.",
+              "page_number": 2,
+              "row": 1,
+              "col": 3
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 2,
+              "row": 2,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 2,
+              "row": 2,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다.",
+              "page_number": 2,
+              "row": 3,
+              "col": 3
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 3,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 3,
+              "row": 0,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "추가 건강검진 소견",
+              "page_number": 3,
+              "row": 0,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사항목",
+              "page_number": 4,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사결과",
+              "page_number": 4,
+              "row": 0,
+              "col": 2
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "기본검사",
+              "page_number": 4,
+              "row": 1,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "기본검사",
+              "page_number": 4,
+              "row": 2,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "기본검사",
+              "page_number": 4,
+              "row": 3,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "기본검사",
+              "page_number": 4,
+              "row": 4,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "기본검사",
+              "page_number": 4,
+              "row": 5,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "비강인두계문진",
+              "page_number": 4,
+              "row": 9,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "전립선증상문진",
+              "page_number": 4,
+              "row": 22,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "생식계문진",
+              "page_number": 4,
+              "row": 29,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "신경계문진",
+              "page_number": 4,
+              "row": 30,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계문진",
+              "page_number": 4,
+              "row": 35,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "심전도",
+              "page_number": 4,
+              "row": 36,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "흉부방사선(Chest PA)",
+              "page_number": 4,
+              "row": 37,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "안과계문진",
+              "page_number": 4,
+              "row": 39,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "위장계문진",
+              "page_number": 4,
+              "row": 40,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 2000Hz(좌)",
+              "page_number": 4,
+              "row": 41,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 2000Hz(우)",
+              "page_number": 4,
+              "row": 42,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사항목",
+              "page_number": 5,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "검사결과",
+              "page_number": 5,
+              "row": 0,
+              "col": 2
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 3000Hz(좌)",
+              "page_number": 5,
+              "row": 1,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 3000Hz(우)",
+              "page_number": 5,
+              "row": 2,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 4000Hz(좌)",
+              "page_number": 5,
+              "row": 3,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "청력 4000Hz(우)",
+              "page_number": 5,
+              "row": 4,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계 문진",
+              "page_number": 5,
+              "row": 7,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "피부계문진",
+              "page_number": 5,
+              "row": 19,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "※폐기능검사(PFT I)",
+              "page_number": 5,
+              "row": 21,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(노력성폐활량, FVC)",
+              "page_number": 5,
+              "row": 22,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(노력성 폐활량, FVC%)",
+              "page_number": 5,
+              "row": 23,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(1초간 노력성 호기량, FEV1)",
+              "page_number": 5,
+              "row": 24,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(1초간 노력성 호기량비, FEV1%)",
+              "page_number": 5,
+              "row": 25,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(FEV1/FVC%)",
+              "page_number": 5,
+              "row": 26,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "폐기능(최대호기속도, PEFR)",
+              "page_number": 5,
+              "row": 28,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "흉부방사선(Chest PA)",
+              "page_number": 5,
+              "row": 29,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          }
+        ],
+        "total_locations": 46,
+        "selected_location": "primary"
+      },
+      {
+        "id": "안과_1_5_17_1757866004759745_13",
+        "key": "안과",
+        "key_label": "안과",
+        "anchor_cell": {
+          "text": "안과",
+          "page_number": 1,
+          "row": 5,
+          "col": 17
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 6,
+          "col": 17
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_5",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "안과",
+              "page_number": 4,
+              "row": 39,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "이비인후과검사_1_6_17_1757866004763635_14",
+        "key": "이비인후과검사",
+        "key_label": "이비인후과검사",
+        "anchor_cell": {
+          "text": "이비인후과",
+          "page_number": 1,
+          "row": 6,
+          "col": 17
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 7,
+          "col": 17
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_6",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "가족력_1_7_12_1757866004764697_15",
+        "key": "가족력",
+        "key_label": "가족력",
+        "anchor_cell": {
+          "text": "가족력",
+          "page_number": 1,
+          "row": 7,
+          "col": 12
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 8,
+          "col": 12
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_7",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "피부_1_8_17_1757866004768516_16",
+        "key": "피부",
+        "key_label": "피부",
+        "anchor_cell": {
+          "text": "피부",
+          "page_number": 1,
+          "row": 8,
+          "col": 17
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 9,
+          "col": 17
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_8",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "피부",
+              "page_number": 5,
+              "row": 19,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "업무기인성_1_9_12_1757866004769530_17",
+        "key": "업무기인성",
+        "key_label": "업무기인성",
+        "anchor_cell": {
+          "text": "업무기인성",
+          "page_number": 1,
+          "row": 9,
+          "col": 12
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 10,
+          "col": 12
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_9",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "취급물질_1_11_0_1757866004774930_18",
+        "key": "취급물질",
+        "key_label": "취급물질",
+        "anchor_cell": {
+          "text": "취급물질",
+          "page_number": 1,
+          "row": 11,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 12,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_11",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "opinion_1_13_0_1757866004776153_19",
+        "key": "opinion",
+        "key_label": "opinion",
+        "anchor_cell": {
+          "text": "치과소견",
+          "page_number": 1,
+          "row": 13,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 14,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_13",
+        "confidence": 0.7,
+        "match_type": "suffix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "평가구분",
+              "page_number": 1,
+              "row": 0,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 2,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 2,
+              "row": 0,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "사후관리소견",
+              "page_number": 2,
+              "row": 0,
+              "col": 4
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 2,
+              "row": 2,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 2,
+              "row": 2,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "판정",
+              "page_number": 3,
+              "row": 0,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "소견/조치",
+              "page_number": 3,
+              "row": 0,
+              "col": 3
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "추가 건강검진 소견",
+              "page_number": 3,
+              "row": 0,
+              "col": 0
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          }
+        ],
+        "total_locations": 10,
+        "selected_location": "primary"
+      },
+      {
+        "id": "키_1_0_0_1757866004777789_20",
+        "key": "키",
+        "key_label": "키",
+        "anchor_cell": {
+          "text": "건강관리구분",
+          "page_number": 1,
+          "row": 0,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 1,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_0",
+        "confidence": 0.7,
+        "match_type": "suffix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "건강관리구분_1_0_2_1757866004777904_21",
+        "key": "건강관리구분",
+        "key_label": "건강관리구분",
+        "anchor_cell": {
+          "text": "건강관리구분 내용",
+          "page_number": 1,
+          "row": 0,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 1,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_0",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "건강관리구분 내용_1_0_2_1757866004777908_22",
+        "key": "건강관리구분 내용",
+        "key_label": "건강관리구분 내용",
+        "anchor_cell": {
+          "text": "건강관리구분 내용",
+          "page_number": 1,
+          "row": 0,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 1,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_0",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "검사결과_1_8_2_1757866004782269_23",
+        "key": "검사결과",
+        "key_label": "검사결과",
+        "anchor_cell": {
+          "text": "건강진단 1차검사결과 건강수준의 평가가 곤란하거나 질병이 의심되는 자 (제2차건강진단 대상자)",
+          "page_number": 1,
+          "row": 8,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 1,
+          "row": 9,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_1_8",
+        "confidence": 0.4,
+        "match_type": "partial",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "유해인자_2_0_2_1757866004783943_24",
+        "key": "유해인자",
+        "key_label": "유해인자",
+        "anchor_cell": {
+          "text": "유해인자",
+          "page_number": 2,
+          "row": 0,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 1,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_0",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "표적장기명_2_2_2_1757866004785239_25",
+        "key": "표적장기명",
+        "key_label": "표적장기명",
+        "anchor_cell": {
+          "text": "표적장기명",
+          "page_number": 2,
+          "row": 2,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_2",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "표적장기명",
+              "page_number": 3,
+              "row": 0,
+              "col": 2
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "표적장기명",
+              "page_number": 4,
+              "row": 0,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "표적장기명",
+              "page_number": 5,
+              "row": 0,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 4,
+        "selected_location": "primary"
+      },
+      {
+        "id": "간담도계_2_3_2_1757866004785591_26",
+        "key": "간담도계",
+        "key_label": "간담도계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "간담도계",
+              "page_number": 4,
+              "row": 6,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "간담도계",
+              "page_number": 4,
+              "row": 7,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "간담도계",
+              "page_number": 4,
+              "row": 8,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 4,
+        "selected_location": "primary"
+      },
+      {
+        "id": "비강,인두_2_3_2_1757866004785606_27",
+        "key": "비강,인두",
+        "key_label": "비강,인두",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "비강,인두",
+              "page_number": 4,
+              "row": 9,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "비뇨기계_2_3_2_1757866004785620_28",
+        "key": "비뇨기계",
+        "key_label": "비뇨기계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 10,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 11,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 12,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 13,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 14,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 15,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 16,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 17,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 18,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 19,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 20,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 21,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비뇨기계",
+              "page_number": 4,
+              "row": 22,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 14,
+        "selected_location": "primary"
+      },
+      {
+        "id": "생물학적_2_3_2_1757866004785633_29",
+        "key": "생물학적",
+        "key_label": "생물학적",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 23,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 24,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 25,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 26,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 27,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "생물학적",
+              "page_number": 4,
+              "row": 28,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 7,
+        "selected_location": "primary"
+      },
+      {
+        "id": "생식계_2_3_2_1757866004785637_30",
+        "key": "생식계",
+        "key_label": "생식계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.7,
+        "match_type": "suffix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "생식계",
+              "page_number": 4,
+              "row": 29,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "신경계_2_3_2_1757866004785648_31",
+        "key": "신경계",
+        "key_label": "신경계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "신경계",
+              "page_number": 4,
+              "row": 30,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "심혈관계_2_3_2_1757866004785652_32",
+        "key": "심혈관계",
+        "key_label": "심혈관계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 31,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 32,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 33,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 34,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 35,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 36,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "심혈관계",
+              "page_number": 4,
+              "row": 37,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 8,
+        "selected_location": "primary"
+      },
+      {
+        "id": "악구강계_2_3_2_1757866004785664_33",
+        "key": "악구강계",
+        "key_label": "악구강계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "악구강계",
+              "page_number": 4,
+              "row": 38,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "위장관계_2_3_2_1757866004785676_34",
+        "key": "위장관계",
+        "key_label": "위장관계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "위장관계",
+              "page_number": 4,
+              "row": 40,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "조혈기계_2_3_2_1757866004785689_35",
+        "key": "조혈기계",
+        "key_label": "조혈기계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 8,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 9,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 10,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 11,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 12,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 13,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 14,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 15,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 16,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 17,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "조혈기계",
+              "page_number": 5,
+              "row": 18,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 12,
+        "selected_location": "primary"
+      },
+      {
+        "id": "호흡기계_2_3_2_1757866004785701_36",
+        "key": "호흡기계",
+        "key_label": "호흡기계",
+        "anchor_cell": {
+          "text": "심혈관계 피부 위장관계 간담도계 조혈기계 비강,인두 신경계 비뇨기계 호흡기계 생물학적 안과 악구강계 생식계",
+          "page_number": 2,
+          "row": 3,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 2,
+          "row": 4,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_2_3",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "이비인후계_3_1_2_1757866004786381_37",
+        "key": "이비인후계",
+        "key_label": "이비인후계",
+        "anchor_cell": {
+          "text": "이비인후계",
+          "page_number": 3,
+          "row": 1,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 3,
+          "row": 2,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_3_1",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 4,
+              "row": 41,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 4,
+              "row": 42,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 1,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 2,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 3,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 4,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 5,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 6,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "이비인후계",
+              "page_number": 5,
+              "row": 7,
+              "col": 0
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 10,
+        "selected_location": "primary"
+      },
+      {
+        "id": "업무수행적합여부_3_1_0_1757866004788071_38",
+        "key": "업무수행적합여부",
+        "key_label": "업무수행적합여부",
+        "anchor_cell": {
+          "text": "업무수행적합여부 [가]-건강관리상 현재의 조건하에서 작업이 가능한 경우",
+          "page_number": 3,
+          "row": 1,
+          "col": 0
+        },
+        "value_cell": {
+          "page_number": 3,
+          "row": 2,
+          "col": 0
+        },
+        "relative_position": "next_row",
+        "table_id": "table_3_1",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "정상치_4_0_3_1757866004788349_39",
+        "key": "정상치",
+        "key_label": "정상치",
+        "anchor_cell": {
+          "text": "정상치",
+          "page_number": 4,
+          "row": 0,
+          "col": 3
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 1,
+          "col": 3
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_0",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "정상치",
+              "page_number": 5,
+              "row": 0,
+              "col": 3
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "basic_4_1_1_1757866004788470_40",
+        "key": "basic",
+        "key_label": "basic",
+        "anchor_cell": {
+          "text": "신장",
+          "page_number": 4,
+          "row": 1,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 2,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_1",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "체중",
+              "page_number": 4,
+              "row": 2,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "수축기혈압",
+              "page_number": 4,
+              "row": 4,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "이완기혈압",
+              "page_number": 4,
+              "row": 5,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "수축기혈압",
+              "page_number": 4,
+              "row": 10,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "이완기혈압",
+              "page_number": 4,
+              "row": 11,
+              "col": 1
+            },
+            "confidence": 0.7,
+            "match_type": "suffix"
+          },
+          {
+            "anchor_cell": {
+              "text": "요중백혈구(WBC)",
+              "page_number": 4,
+              "row": 15,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "총콜레스테롤(T.Cholesterol)",
+              "page_number": 4,
+              "row": 31,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "고밀도콜레스테롤(HDL-Cholesterol)",
+              "page_number": 4,
+              "row": 33,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "LDL-콜레스테롤(계산)",
+              "page_number": 4,
+              "row": 34,
+              "col": 1
+            },
+            "confidence": 0.6,
+            "match_type": "word_boundary"
+          },
+          {
+            "anchor_cell": {
+              "text": "백혈구(WBC count)",
+              "page_number": 5,
+              "row": 9,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "적혈구(RBC count)",
+              "page_number": 5,
+              "row": 10,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "혈소판(PLT, Platelet count)",
+              "page_number": 5,
+              "row": 11,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "망상적혈구(Reticulocyte Count)",
+              "page_number": 5,
+              "row": 12,
+              "col": 1
+            },
+            "confidence": 0.4,
+            "match_type": "partial"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 20,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계문진(청진)",
+              "page_number": 5,
+              "row": 20,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 21,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 22,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 23,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 24,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 25,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 26,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 27,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 28,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "호흡기계",
+              "page_number": 5,
+              "row": 29,
+              "col": 0
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          }
+        ],
+        "total_locations": 25,
+        "selected_location": "primary"
+      },
+      {
+        "id": "체질량지수(BMI)_4_3_1_1757866004788876_41",
+        "key": "체질량지수(BMI)",
+        "key_label": "체질량지수(BMI)",
+        "anchor_cell": {
+          "text": "체질량지수(BMI)",
+          "page_number": 4,
+          "row": 3,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 4,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_3",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈청지오티(AST(GOT))_4_6_1_1757866004789875_42",
+        "key": "혈청지오티(AST(GOT))",
+        "key_label": "혈청지오티(AST(GOT))",
+        "anchor_cell": {
+          "text": "혈청지오티(AST(GOT))",
+          "page_number": 4,
+          "row": 6,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 7,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_6",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈청지피티(ALT(GPT))_4_7_1_1757866004790418_43",
+        "key": "혈청지피티(ALT(GPT))",
+        "key_label": "혈청지피티(ALT(GPT))",
+        "anchor_cell": {
+          "text": "혈청지피티(ALT(GPT))",
+          "page_number": 4,
+          "row": 7,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 8,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_7",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "감마지티피(γ-GTP)_4_8_1_1757866004791010_44",
+        "key": "감마지티피(γ-GTP)",
+        "key_label": "감마지티피(γ-GTP)",
+        "anchor_cell": {
+          "text": "감마지티피(γ-GTP)",
+          "page_number": 4,
+          "row": 8,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 9,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_8",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈당_4_12_1_1757866004794351_45",
+        "key": "혈당",
+        "key_label": "혈당",
+        "anchor_cell": {
+          "text": "요당(Urine Glucose)",
+          "page_number": 4,
+          "row": 12,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 13,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_12",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요단백(Urine Protein)_4_13_1_1757866004796861_46",
+        "key": "요단백(Urine Protein)",
+        "key_label": "요단백(Urine Protein)",
+        "anchor_cell": {
+          "text": "요단백(Urine Protein)",
+          "page_number": 4,
+          "row": 13,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 14,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_13",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요잠혈(Urine Blood)_4_14_1_1757866004799326_47",
+        "key": "요잠혈(Urine Blood)",
+        "key_label": "요잠혈(Urine Blood)",
+        "anchor_cell": {
+          "text": "요잠혈(Urine Blood)",
+          "page_number": 4,
+          "row": 14,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 15,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_14",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요산도(Urine PH)_4_19_1_1757866004812015_48",
+        "key": "요산도(Urine PH)",
+        "key_label": "요산도(Urine PH)",
+        "anchor_cell": {
+          "text": "요산도(Urine PH)",
+          "page_number": 4,
+          "row": 19,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 20,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_19",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요비중(Urine SG)_4_21_1_1757866004815051_49",
+        "key": "요비중(Urine SG)",
+        "key_label": "요비중(Urine SG)",
+        "anchor_cell": {
+          "text": "요비중(Urine SG)",
+          "page_number": 4,
+          "row": 21,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 22,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_21",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요중 메틸마뇨산_4_23_1_1757866004817425_50",
+        "key": "요중 메틸마뇨산",
+        "key_label": "요중 메틸마뇨산",
+        "anchor_cell": {
+          "text": "요중 메틸마뇨산",
+          "page_number": 4,
+          "row": 23,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 24,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_23",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요중삼염화초산(TCE)_4_24_1_1757866004818019_51",
+        "key": "요중삼염화초산(TCE)",
+        "key_label": "요중삼염화초산(TCE)",
+        "anchor_cell": {
+          "text": "요중삼염화초산(TCE)",
+          "page_number": 4,
+          "row": 24,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 25,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_24",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요중크레아티닌(분석용)_4_25_1_1757866004818618_52",
+        "key": "요중크레아티닌(분석용)",
+        "key_label": "요중크레아티닌(분석용)",
+        "anchor_cell": {
+          "text": "요중크레아티닌(분석용)",
+          "page_number": 4,
+          "row": 25,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 26,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_25",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈중 납_4_26_1_1757866004819215_53",
+        "key": "혈중 납",
+        "key_label": "혈중 납",
+        "anchor_cell": {
+          "text": "혈중 납",
+          "page_number": 4,
+          "row": 26,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 27,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_26",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈중 카드뮴_4_27_1_1757866004819810_54",
+        "key": "혈중 카드뮴",
+        "key_label": "혈중 카드뮴",
+        "anchor_cell": {
+          "text": "혈중 카드뮴",
+          "page_number": 4,
+          "row": 27,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 28,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_27",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "요중 o-크레졸_4_28_1_1757866004820406_55",
+        "key": "요중 o-크레졸",
+        "key_label": "요중 o-크레졸",
+        "anchor_cell": {
+          "text": "요중 o-크레졸",
+          "page_number": 4,
+          "row": 28,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 29,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_28",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "중성지방(Triglyceride)_4_32_1_1757866004824960_56",
+        "key": "중성지방(Triglyceride)",
+        "key_label": "중성지방(Triglyceride)",
+        "anchor_cell": {
+          "text": "중성지방(Triglyceride)",
+          "page_number": 4,
+          "row": 32,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 33,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_32",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "비결핵성질환-좌상 늑_4_37_2_1757866004830912_57",
+        "key": "비결핵성질환-좌상 늑",
+        "key_label": "비결핵성질환-좌상 늑",
+        "anchor_cell": {
+          "text": "비결핵성질환-좌상 늑",
+          "page_number": 4,
+          "row": 37,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 38,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_37",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "비결핵성질환-좌상 늑",
+              "page_number": 5,
+              "row": 29,
+              "col": 2
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "비결핵성질환-좌상_4_37_2_1757866004830917_58",
+        "key": "비결핵성질환-좌상",
+        "key_label": "비결핵성질환-좌상",
+        "anchor_cell": {
+          "text": "비결핵성질환-좌상 늑",
+          "page_number": 4,
+          "row": 37,
+          "col": 2
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 38,
+          "col": 2
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_37",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "비결핵성질환-좌상",
+              "page_number": 4,
+              "row": 37,
+              "col": 4
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          },
+          {
+            "anchor_cell": {
+              "text": "비결핵성질환-좌상 늑",
+              "page_number": 5,
+              "row": 29,
+              "col": 2
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          },
+          {
+            "anchor_cell": {
+              "text": "비결핵성질환-좌상",
+              "page_number": 5,
+              "row": 29,
+              "col": 4
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 4,
+        "selected_location": "primary"
+      },
+      {
+        "id": "치아부식증(특수)_4_38_1_1757866004832031_59",
+        "key": "치아부식증(특수)",
+        "key_label": "치아부식증(특수)",
+        "anchor_cell": {
+          "text": "치아부식증(특수)",
+          "page_number": 4,
+          "row": 38,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 4,
+          "row": 39,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_4_38",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "이경검사(좌)_5_5_1_1757866004840385_60",
+        "key": "이경검사(좌)",
+        "key_label": "이경검사(좌)",
+        "anchor_cell": {
+          "text": "이경검사(좌)",
+          "page_number": 5,
+          "row": 5,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 6,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_5",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "이경검사(우)",
+              "page_number": 5,
+              "row": 6,
+              "col": 1
+            },
+            "confidence": 0.8,
+            "match_type": "prefix"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "이경검사(우)_5_5_1_1757866004840390_61",
+        "key": "이경검사(우)",
+        "key_label": "이경검사(우)",
+        "anchor_cell": {
+          "text": "이경검사(좌)",
+          "page_number": 5,
+          "row": 5,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 6,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_5",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "이경검사(우)",
+              "page_number": 5,
+              "row": 6,
+              "col": 1
+            },
+            "confidence": 0.95,
+            "match_type": "exact"
+          }
+        ],
+        "total_locations": 2,
+        "selected_location": "primary"
+      },
+      {
+        "id": "혈구용적치(헤마토크리트, HCT)_5_8_1_1757866004846857_62",
+        "key": "혈구용적치(헤마토크리트, HCT)",
+        "key_label": "혈구용적치(헤마토크리트, HCT)",
+        "anchor_cell": {
+          "text": "혈구용적치(헤마토크리트, HCT)",
+          "page_number": 5,
+          "row": 8,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 9,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_8",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "백혈구_5_13_1_1757866004849380_63",
+        "key": "백혈구",
+        "key_label": "백혈구",
+        "anchor_cell": {
+          "text": "호중구(WBC Diff count Seg)",
+          "page_number": 5,
+          "row": 13,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 14,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_13",
+        "confidence": 0.6,
+        "match_type": "word_boundary",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": true,
+        "alternative_locations": [
+          {
+            "anchor_cell": {
+              "text": "임파구(WBC Diff count Lym)",
+              "page_number": 5,
+              "row": 14,
+              "col": 1
+            },
+            "confidence": 0.6,
+            "match_type": "word_boundary"
+          },
+          {
+            "anchor_cell": {
+              "text": "단핵구(WBC Diff count Mono)",
+              "page_number": 5,
+              "row": 15,
+              "col": 1
+            },
+            "confidence": 0.6,
+            "match_type": "word_boundary"
+          },
+          {
+            "anchor_cell": {
+              "text": "호산구(WBC Diff count Eos)",
+              "page_number": 5,
+              "row": 16,
+              "col": 1
+            },
+            "confidence": 0.6,
+            "match_type": "word_boundary"
+          },
+          {
+            "anchor_cell": {
+              "text": "호염구(WBC Diff count Baso)",
+              "page_number": 5,
+              "row": 17,
+              "col": 1
+            },
+            "confidence": 0.6,
+            "match_type": "word_boundary"
+          }
+        ],
+        "total_locations": 5,
+        "selected_location": "primary"
+      },
+      {
+        "id": "호중구(WBC Diff count Seg)_5_13_1_1757866004849441_64",
+        "key": "호중구(WBC Diff count Seg)",
+        "key_label": "호중구(WBC Diff count Seg)",
+        "anchor_cell": {
+          "text": "호중구(WBC Diff count Seg)",
+          "page_number": 5,
+          "row": 13,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 14,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_13",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "임파구(WBC Diff count Lym)_5_14_1_1757866004850072_65",
+        "key": "임파구(WBC Diff count Lym)",
+        "key_label": "임파구(WBC Diff count Lym)",
+        "anchor_cell": {
+          "text": "임파구(WBC Diff count Lym)",
+          "page_number": 5,
+          "row": 14,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 15,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_14",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "단핵구(WBC Diff count Mono)_5_15_1_1757866004850679_66",
+        "key": "단핵구(WBC Diff count Mono)",
+        "key_label": "단핵구(WBC Diff count Mono)",
+        "anchor_cell": {
+          "text": "단핵구(WBC Diff count Mono)",
+          "page_number": 5,
+          "row": 15,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 16,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_15",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "호산구(WBC Diff count Eos)_5_16_1_1757866004851281_67",
+        "key": "호산구(WBC Diff count Eos)",
+        "key_label": "호산구(WBC Diff count Eos)",
+        "anchor_cell": {
+          "text": "호산구(WBC Diff count Eos)",
+          "page_number": 5,
+          "row": 16,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 17,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_16",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "호염구(WBC Diff count Baso)_5_17_1_1757866004851875_68",
+        "key": "호염구(WBC Diff count Baso)",
+        "key_label": "호염구(WBC Diff count Baso)",
+        "anchor_cell": {
+          "text": "호염구(WBC Diff count Baso)",
+          "page_number": 5,
+          "row": 17,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 18,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_17",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "헤모글로빈_5_18_1_1757866004852402_69",
+        "key": "헤모글로빈",
+        "key_label": "헤모글로빈",
+        "anchor_cell": {
+          "text": "혈색소량(Hb,결과용)",
+          "page_number": 5,
+          "row": 18,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 19,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_18",
+        "confidence": 0.8,
+        "match_type": "prefix",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      },
+      {
+        "id": "MMEF(최대호기중중간유속)%_5_27_1_1757866004859870_70",
+        "key": "MMEF(최대호기중중간유속)%",
+        "key_label": "MMEF(최대호기중중간유속)%",
+        "anchor_cell": {
+          "text": "MMEF(최대호기중중간유속)%",
+          "page_number": 5,
+          "row": 27,
+          "col": 1
+        },
+        "value_cell": {
+          "page_number": 5,
+          "row": 28,
+          "col": 1
+        },
+        "relative_position": "next_row",
+        "table_id": "table_5_27",
+        "confidence": 0.95,
+        "match_type": "exact",
+        "is_complex": false,
+        "expected_fields": {},
+        "detected_fields": {},
+        "multiple_found": false,
+        "alternative_locations": [],
+        "total_locations": 1,
+        "selected_location": "primary"
+      }
+    ],
+    "pattern_suggestions": [
+      {
+        "anchor_text": "이웅용",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 1,
+          "row": 0,
+          "col": 7
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "남성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 1,
+          "row": 0,
+          "col": 15
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "기타",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 1,
+          "row": 3,
+          "col": 8
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "지방사무소",
+        "suggested_key": "opinion",
+        "location": {
+          "page_number": 1,
+          "row": 3,
+          "col": 15
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "진찰",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 1,
+          "row": 5,
+          "col": 16
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "치아",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 1,
+          "row": 10,
+          "col": 17
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 1,
+          "row": 13,
+          "col": 1
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "(인)",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 1,
+          "row": 13,
+          "col": 19
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 9,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 9,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 12,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 12,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 12,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 13,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 13,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 13,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 14,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 14,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 14,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 15,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 15,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 15,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 17,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 17,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 17,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 18,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 18,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 18,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 20,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 20,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "음성",
+        "suggested_key": "personal",
+        "location": {
+          "page_number": 4,
+          "row": 20,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 22,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 22,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 29,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 29,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 30,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 30,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 35,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 35,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 36,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 36,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 36,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 37,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 38,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 38,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 39,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 39,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 40,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 4,
+          "row": 40,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 5,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 5,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 5,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 6,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 6,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 6,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 7,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 7,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 19,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 19,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 20,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 20,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 21,
+          "col": 2
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 21,
+          "col": 3
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 21,
+          "col": 4
+        },
+        "confidence": 0.6
+      },
+      {
+        "anchor_text": "정상",
+        "suggested_key": "special",
+        "location": {
+          "page_number": 5,
+          "row": 29,
+          "col": 3
+        },
+        "confidence": 0.6
+      }
+    ],
+    "new_key_suggestions": [
+      {
+        "key_name": "창원파티마병원",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 2,
+          "col": 1
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "창원파티마병원"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 5,
+          "col": 13
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 5,
+          "col": 20
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 6,
+          "col": 1
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 6,
+          "col": 3
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 6,
+          "col": 6
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 6,
+          "col": 20
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 7,
+          "col": 13
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 8,
+          "col": 1
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 8,
+          "col": 3
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 8,
+          "col": 6
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 8,
+          "col": 20
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 9,
+          "col": 13
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 10,
+          "col": 1
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 10,
+          "col": 3
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 10,
+          "col": 6
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 10,
+          "col": 20
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "해당없음",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 12,
+          "col": 1
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "해당없음"
+        ]
+      },
+      {
+        "key_name": "CN(야간작업)",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 4,
+          "col": 0
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "CN(야간작업)"
+        ]
+      },
+      {
+        "key_name": "DN(야간작업)",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 1,
+          "row": 7,
+          "col": 0
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "DN(야간작업)"
+        ]
+      },
+      {
+        "key_name": "정상 / 건강상태 양호합니다.",
+        "suggested_category": "special",
+        "location": {
+          "page_number": 3,
+          "row": 1,
+          "col": 3
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "정상 / 건강상태 양호합니다."
+        ]
+      },
+      {
+        "key_name": "약양성(±)",
+        "suggested_category": "cancer",
+        "location": {
+          "page_number": 4,
+          "row": 16,
+          "col": 2
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "약양성(±)"
+        ]
+      },
+      {
+        "key_name": "약양성(±)",
+        "suggested_category": "cancer",
+        "location": {
+          "page_number": 4,
+          "row": 16,
+          "col": 4
+        },
+        "confidence": 0.5,
+        "patterns": [
+          "약양성(±)"
+        ]
+      }
+    ],
+    "statistics": {
+      "total_found": 71,
+      "pages_analyzed": 5,
+      "tables_analyzed": 8,
+      "suggestions_count": 65,
+      "new_keys_count": 23
+    }
+  },
+  "raw_tables": [
+    {
+      "page_number": 1,
+      "rows_count": 14,
+      "cols_count": 22,
+      "first_row": [
+        "주민등록번호",
+        "740615-1******",
+        "",
+        "",
+        "이름",
+        "",
+        "",
+        "이웅용",
+        "",
+        "나이",
+        "",
+        "",
+        "50",
+        "",
+        "성별",
+        "남성",
+        "",
+        "",
+        "사원번호",
+        "",
+        "",
+        "01511"
+      ],
+      "sample_cells": [
+        [
+          "주민등록번호",
+          "740615-1******",
+          "",
+          "",
+          "이름",
+          "",
+          "",
+          "이웅용",
+          "",
+          "나이",
+          "",
+          "",
+          "50",
+          "",
+          "성별",
+          "남성",
+          "",
+          "",
+          "사원번호",
+          "",
+          "",
+          "01511"
+        ],
+        [
+          "근로자주소",
+          "경상남도 창원시 진해구 조천북로 65 104-402",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "전화번호",
+          "",
+          "",
+          "01036595213",
+          "",
+          "",
+          ""
+        ],
+        [
+          "사업체명",
+          "창원파티마병원",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "업종",
+          "",
+          "",
+          "종합 병원",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "page_number": 1,
+      "rows_count": 9,
+      "cols_count": 3,
+      "first_row": [
+        "건강관리구분",
+        "",
+        "건강관리구분 내용"
+      ],
+      "sample_cells": [
+        [
+          "건강관리구분",
+          "",
+          "건강관리구분 내용"
+        ],
+        [
+          "A",
+          "",
+          "건강관리상 사후관리가 필요 없는 자 (건강자)"
+        ],
+        [
+          "C",
+          "C1",
+          "직업성 질병으로 진전될 우려가 있어 추적조사 등 관찰이 필요한 자 (직업병 요관찰자)"
+        ]
+      ]
+    },
+    {
+      "page_number": 1,
+      "rows_count": 5,
+      "cols_count": 2,
+      "first_row": [
+        "평가구분",
+        "업 무 수 행 적 합 여 부 평 가 기 준"
+      ],
+      "sample_cells": [
+        [
+          "평가구분",
+          "업 무 수 행 적 합 여 부 평 가 기 준"
+        ],
+        [
+          "가",
+          "건강관리상 현재의 조건 하에서 작업이 가능한 경우"
+        ],
+        [
+          "나",
+          "일정한 조건(환경개선, 보호구착용, 건강진단의 주기를 앞당기는 경우 등)하에서 현재의 작업이 가능한 경우"
+        ]
+      ]
+    },
+    {
+      "page_number": 2,
+      "rows_count": 4,
+      "cols_count": 5,
+      "first_row": [
+        "",
+        "판정",
+        "유해인자",
+        "소견/조치",
+        "사후관리소견"
+      ],
+      "sample_cells": [
+        [
+          "",
+          "판정",
+          "유해인자",
+          "소견/조치",
+          "사후관리소견"
+        ],
+        [
+          "유 해 인 자 별 건 강 진 단 결 과",
+          "A A A A A A A A C2 C2 C2 A C2 C2 A C2",
+          "이황화탄소 메탄올 이소프로필알코올 크실렌 톨루엔 트리클로로에틸렌 1-브로모프로판 에피클로로히드린 질산 포름알데히드 황산 납 및 그 무기화합물 카드뮴 및 그 화합물 망간 및 그 무기화합물 구리(분진,흄,미스트) 주석과 그 무기화합물",
+          "정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다. 정상 / 건강상태 양호합니다. 흉부질환주의 / 흉부방사선 추적검사 요합니다.",
+          "필요없음 필요없음 필요없음 필요없음 필요없음 필요없음 필요없음 필요없음 건강상담 건강상담 건강상담 필요없음 건강상담 건강상담 필요없음 건강상담"
+        ],
+        [
+          "표 적 장 기 별 건 강 진 단 결 과",
+          "판정",
+          "표적장기명",
+          "소견/조치",
+          ""
+        ]
+      ]
+    },
+    {
+      "page_number": 3,
+      "rows_count": 2,
+      "cols_count": 4,
+      "first_row": [
+        "표 적 장 기 별 건 강 진 단 결 과",
+        "판정",
+        "표적장기명",
+        "소견/조치"
+      ],
+      "sample_cells": [
+        [
+          "표 적 장 기 별 건 강 진 단 결 과",
+          "판정",
+          "표적장기명",
+          "소견/조치"
+        ],
+        [
+          "",
+          "A",
+          "이비인후계",
+          "정상 / 건강상태 양호합니다."
+        ]
+      ]
+    },
+    {
+      "page_number": 3,
+      "rows_count": 2,
+      "cols_count": 1,
+      "first_row": [
+        "추가 건강검진 소견"
+      ],
+      "sample_cells": [
+        [
+          "추가 건강검진 소견"
+        ],
+        [
+          "업무수행적합여부 [가]-건강관리상 현재의 조건하에서 작업이 가능한 경우"
+        ]
+      ]
+    },
+    {
+      "page_number": 4,
+      "rows_count": 43,
+      "cols_count": 6,
+      "first_row": [
+        "표적장기명",
+        "검사항목",
+        "검사결과",
+        "정상치",
+        "전년도 검사결과",
+        "전전년도 검사결과"
+      ],
+      "sample_cells": [
+        [
+          "표적장기명",
+          "검사항목",
+          "검사결과",
+          "정상치",
+          "전년도 검사결과",
+          "전전년도 검사결과"
+        ],
+        [
+          "기본검사",
+          "신장",
+          "177.2",
+          "",
+          "",
+          ""
+        ],
+        [
+          "기본검사",
+          "체중",
+          "76.8",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "page_number": 5,
+      "rows_count": 29,
+      "cols_count": 6,
+      "first_row": [
+        "이비인후계",
+        "청력 3000Hz(좌)",
+        "10",
+        "-10~39",
+        "10",
+        ""
+      ],
+      "sample_cells": [
+        [
+          "이비인후계",
+          "청력 3000Hz(좌)",
+          "10",
+          "-10~39",
+          "10",
+          ""
+        ],
+        [
+          "이비인후계",
+          "청력 3000Hz(우)",
+          "10",
+          "-10~39",
+          "10",
+          ""
+        ],
+        [
+          "이비인후계",
+          "청력 4000Hz(좌)",
+          "5",
+          "-10~39",
+          "5",
+          ""
+        ]
+      ]
+    }
+  ]
+}

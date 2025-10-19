@@ -6,7 +6,7 @@ API v1 라우터 통합
 
 from fastapi import APIRouter
 
-from api.v1.endpoints import files, extraction, tables, relationships, analysis, templates, ai_extraction, key_database
+from api.v1.endpoints import files, extraction, tables, relationships, analysis, templates, ai_extraction, ai_extraction_stream, key_database, pattern_management, prompt_debug
 
 # 메인 API v1 라우터
 api_router = APIRouter()
@@ -62,8 +62,29 @@ api_router.include_router(
 )
 
 api_router.include_router(
+    ai_extraction_stream.router,
+    prefix="/ai-extraction",
+    tags=["ai-extraction-stream"],
+    responses={503: {"description": "AI 스트리밍 서비스 사용 불가"}}
+)
+
+api_router.include_router(
     key_database.router,
     prefix="/extraction",
     tags=["key-database"],
     responses={500: {"description": "키 데이터베이스 처리 오류"}}
+)
+
+api_router.include_router(
+    pattern_management.router,
+    prefix="/patterns",
+    tags=["pattern-management"],
+    responses={500: {"description": "패턴 관리 처리 오류"}}
+)
+
+api_router.include_router(
+    prompt_debug.router,
+    prefix="/prompt-debug",
+    tags=["prompt-debug"],
+    responses={500: {"description": "프롬프트 디버깅 처리 오류"}}
 )

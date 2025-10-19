@@ -1,27 +1,343 @@
 {
+  "_ai_prompts": {
+    "header_analysis": {
+      "system_prompt": "당신은 의료 검진 보고서의 테이블 헤더를 분석하는 전문가입니다. 다양한 형태의 테이블 구조(가로/세로/혼합 헤더)를 정확히 식별할 수 있습니다.",
+      "user_prompt_template": "의료 검진 보고서 테이블의 구조와 헤더를 종합적으로 분석해주세요.\n\n## 전체 테이블 구조 (행번호: [열0, 열1, 열2, ...]):\n{table_data}\n\n## 테이블 구조 분석 요구사항:\n1. **헤더 방향 판단**: 가로(top), 세로(left), 혼합(both), 복합(mixed)\n2. **테이블 레이아웃**: horizontal(가로 중심), vertical(세로 중심), mixed(혼합)\n3. **각 셀의 역할**: 헤더인지 데이터인지 구분\n\n## 다양한 테이블 형태 예시:\n- **가로 헤더**: 첫 번째 행이 헤더 (검사항목, 결과, 정상치, 판정)\n- **세로 헤더**: 첫 번째 열이 헤더 (신장, 체중, 혈압 등)\n- **혼합 헤더**: 첫 행과 첫 열 모두 헤더\n- **복합 구조**: 계층적 헤더, 병합된 셀 등\n\n## 필드 타입 분류:\n- result: 검사결과, 측정값, 수치, 값\n- normal_range: 정상치, 기준치, 정상범위, 참고치, 기준값  \n- judgment: 판정, 소견, 결과, 평가, 상태\n- opinion: 소견, 의견, 비고, 특이사항, 코멘트\n- previous_year: 전년도, 작년, 이전, 과거, 전년\n- two_years_ago: 전전년도, 재작년, 2년전\n- unit: 단위, unit\n- reference: 참조, 참고, 기준\n- key_name: 검사항목명, 키 이름\n\n## 응답 형식 (JSON):\n{{\n    \"table_structure\": \"horizontal|vertical|mixed\",\n    \"header_orientation\": \"top|left|both|mixed\",\n    \"column_mappings\": {{\n        \"0\": \"key_name\",\n        \"1\": \"result\", \n        \"2\": \"normal_range\",\n        \"3\": \"judgment\"\n    }},\n    \"row_mappings\": {{\n        \"0\": \"header\",\n        \"1\": \"data_row_1\"\n    }},\n    \"confidence\": 0.95,\n    \"reasoning\": \"테이블 구조 분석 근거\",\n    \"table_analysis\": \"이 테이블은 가로형 구조로 첫 번째 행이 헤더입니다...\",\n    \"detected_fields\": [\"result\", \"normal_range\", \"judgment\"]\n}}\n\n## 중요 분석 규칙:\n1. 테이블 전체 구조를 먼저 파악 (가로/세로/혼합)\n2. 헤더의 위치와 방향을 정확히 식별\n3. 각 셀이 헤더인지 데이터인지 구분\n4. 의료 검진 보고서의 일반적인 패턴 고려\n5. 불명확한 경우 confidence를 낮게 설정\n6. table_analysis에 구조 분석 과정 상세 설명",
+      "parameters": ["table_data"],
+      "model_settings": {
+        "temperature": 0.1,
+        "max_tokens": 1000
+      }
+    },
+    "value_extraction": {
+      "system_prompt": "당신은 의료 검진 보고서에서 특정 키에 대한 값을 정확하게 추출하는 AI입니다. 다양한 테이블 구조와 의료 데이터 형식에 대한 전문 지식을 가지고 있습니다.",
+      "user_prompt_template": "당신은 의료 검진 보고서에서 특정 키에 대한 값을 정확하게 추출하는 AI입니다.\n\n## 작업 지시사항\n1. 주어진 테이블 데이터에서 \"{key_label}\" ({key_name}) 키에 해당하는 값을 찾아주세요.\n2. 앵커 셀 위치: 행 {anchor_row}, 열 {anchor_col} - \"{anchor_text}\"\n3. 앵커 셀 근처에서 해당 키의 값을 찾아주세요.\n\n## 테이블 데이터 구조 설명\n- 테이블은 2차원 배열로 구성: data[row][col]\n- 행(row): 세로 방향 (위에서 아래로)\n- 열(col): 가로 방향 (왼쪽에서 오른쪽으로)\n- 앵커 셀 기준으로:\n  * 오른쪽: col + 1\n  * 왼쪽: col - 1  \n  * 아래쪽: row + 1\n  * 위쪽: row - 1\n\n{key_specific_instructions}\n\n## 테이블 데이터 (페이지 {page_number})\n{table_data}\n\n## 응답 형식 (JSON)\n{{\n    \"extracted_value\": \"추출된 값 (문자열)\",\n    \"confidence\": 0.95,\n    \"reasoning\": \"값을 찾은 근거와 추론 과정\",\n    \"suggested_position\": {{\n        \"row\": 1,\n        \"col\": 0\n    }}\n}}\n\n## 중요 규칙\n- extracted_value는 반드시 문자열로 반환\n- confidence는 0.0~1.0 사이의 실수\n- suggested_position은 반드시 앵커 셀 기준 상대 좌표로 반환\n  * 앵커 셀 위치: 행 {anchor_row}, 열 {anchor_col}\n  * 상대 좌표 계산: (값_행 - 앵커_행, 값_열 - 앵커_열)\n  * 예시: 앵커가 (1,15)이고 값이 (1,18)이면 상대좌표는 (0,3)",
+      "parameters": ["key_label", "key_name", "anchor_row", "anchor_col", "anchor_text", "key_specific_instructions", "page_number", "table_data"],
+      "model_settings": {
+        "temperature": 0.1,
+        "max_tokens": 800
+      }
+    },
+    "new_key_detection": {
+      "system_prompt": "당신은 의료 검진 보고서에서 새로운 검사항목을 감지하는 전문가입니다. 기존 키 목록에 없는 새로운 의료 검사항목을 식별하고 분류할 수 있습니다.",
+      "user_prompt_template": "## 새로운 키 감지 및 제안\n\n주어진 테이블에서 기존 키 매핑에 없는 새로운 검사항목을 찾아주세요.\n\n## 기존 알려진 키들:\n{existing_keys}\n\n## 테이블 데이터:\n{table_data}\n\n## 분석 요구사항:\n1. 기존 키와 다른 새로운 검사항목 식별\n2. 각 새 키의 카테고리 추정 (personal/basic/special/opinion/temporal/cancer/comprehensive)\n3. 해당 키의 값이 있는 위치 파악\n4. 추출 가능성 평가\n\n## 응답 형식:\n{{\n  \"new_keys_detected\": [\n    {{\n      \"key_name\": \"새발견키\",\n      \"suggested_category\": \"basic\",\n      \"anchor_position\": {{\"row\": 1, \"col\": 0}},\n      \"value_position\": {{\"row\": 1, \"col\": 1}},\n      \"confidence\": 0.8,\n      \"patterns\": [\"새발견키\", \"new_key\"]\n    }}\n  ],\n  \"total_new_keys\": 1\n}}",
+      "parameters": ["existing_keys", "table_data"],
+      "model_settings": {
+        "temperature": 0.2,
+        "max_tokens": 1200
+      }
+    },
+    "key_specific_instructions": {
+      "주민등록번호": "## 주민등록번호 특화 규칙\n- 주민등록번호는 13자리 숫자 (000000-0000000 형식)\n- 앵커 셀 근처에서 숫자 패턴을 찾아주세요\n- 일반적으로 앵커 셀의 오른쪽이나 아래쪽에 위치\n- 하이픈(-)이 포함된 13자리 숫자 문자열을 찾아주세요\n- 예시: \"123456-1234567\", \"1234561234567\" (하이픈 없음)\n- 숫자만 있는 셀을 우선적으로 확인하세요",
+      "신장": "## 신장 특화 규칙\n- 신장은 보통 cm 단위로 표시됩니다\n- 예시: \"170cm\", \"170\", \"170.5cm\"\n- 숫자와 cm가 함께 있는 셀을 찾아주세요\n- 일반적으로 150-200cm 범위의 값입니다",
+      "체중": "## 체중 특화 규칙\n- 체중은 보통 kg 단위로 표시됩니다\n- 예시: \"65kg\", \"65\", \"65.5kg\"\n- 숫자와 kg가 함께 있는 셀을 찾아주세요\n- 일반적으로 30-150kg 범위의 값입니다",
+      "혈압": "## 혈압 특화 규칙\n- 혈압은 보통 \"수축기/이완기\" 형식으로 표시됩니다\n- 예시: \"120/80\", \"120/80mmHg\", \"120-80\"\n- 슬래시(/)나 하이픈(-)으로 구분된 두 숫자를 찾아주세요\n- 수축기: 90-200, 이완기: 60-120 범위가 일반적입니다",
+      "혈당": "## 혈당 특화 규칙\n- 혈당은 보통 mg/dl 단위로 표시됩니다\n- 예시: \"100mg/dl\", \"100\", \"100.5\"\n- 숫자와 mg/dl가 함께 있는 셀을 찾아주세요\n- 일반적으로 70-400mg/dl 범위의 값입니다",
+      "default": "## 일반 규칙\n- 앵커 셀 근처에서 관련된 값을 찾아주세요\n- 숫자, 단위, 특수문자가 포함된 셀을 확인하세요\n- 빈 셀이 아닌 실제 값이 있는 셀을 찾아주세요"
+    }
+  },
+  "_extraction_settings": {
+    "confidence_thresholds": {
+      "exact_match": 0.95,
+      "prefix_match": 0.8,
+      "suffix_match": 0.7,
+      "word_boundary_match": 0.6,
+      "partial_match": 0.4,
+      "minimum_acceptance": 0.4,
+      "ai_analysis_minimum": 0.7,
+      "similarity_threshold": 0.4
+    },
+    "text_processing": {
+      "minimum_pattern_length": 3,
+      "maximum_cell_length": 20,
+      "korean_similarity_threshold": 0.3,
+      "partial_match_bonus": 0.3,
+      "korean_bonus": 0.2
+    },
+    "ai_analysis": {
+      "max_table_rows_for_analysis": 5,
+      "header_analysis_confidence_threshold": 0.7,
+      "default_field_confidence": 0.8
+    },
+    "field_detection_keywords": {
+      "result": ["검사결과", "결과", "측정값", "값", "수치", "측정", "검사값"],
+      "normal_range": ["정상치", "기준치", "정상범위", "참고치", "기준값", "정상", "범위"],
+      "judgment": ["판정", "소견", "결과", "평가", "상태", "진단", "결론"],
+      "opinion": ["소견", "의견", "비고", "특이사항", "코멘트", "의견서", "판독"],
+      "previous_year": ["전년도", "작년", "이전", "과거", "전년", "지난해", "년전"],
+      "two_years_ago": ["전전년도", "재작년", "2년전", "전전년", "2년 전"],
+      "unit": ["단위", "unit", "유닛", "측정단위"],
+      "reference": ["참조", "참고", "기준", "참고값", "기준치"]
+    }
+  },
+  "_category_classification_keywords": {
+    "personal": [
+      "이름", "성명", "나이", "연령", "성별", "주소", "전화", "번호", "생년월일", 
+      "사업체", "회사", "직업", "부서", "소속", "직책", "담당의", "의사", "간호사"
+    ],
+    "temporal": [
+      "이전", "과거", "작년", "전년", "재작년", "지난", "현재", "이번", "금회", 
+      "추적", "경과", "후속", "년도", "결과", "개월전", "일전", "주전"
+    ],
+    "basic": [
+      "신장", "키", "체중", "몸무게", "혈압", "혈당", "콜레스테롤", "헤모글로빈", 
+      "백혈구", "적혈구", "혈소판", "맥박", "체온", "호흡"
+    ],
+    "special": [
+      "검사", "소견", "판정", "문진", "촬영", "내시경", "초음파", "엑스선", "x선", 
+      "방사선", "ct", "mri", "심전도", "뇌파", "폐기능", "청력", "시력"
+    ],
+    "opinion": [
+      "소견", "의견", "판정", "평가", "진단", "결론", "권고", "제안", "조치", "관리"
+    ],
+    "cancer": [
+      "암", "종양", "악성", "양성", "전이", "림프", "조직검사", "생검", "마커"
+    ],
+    "comprehensive": [
+      "종합", "전체", "전반", "총합", "통합", "완전", "포괄", "총괄"
+    ]
+  },
+  "personal": {
+    "성명": [
+      "성명",
+      "이름",
+      "name",
+      "환자명",
+      "환자이름",
+      "성함",
+      "이름/성명"
+    ],
+    "나이": [
+      "나이",
+      "age",
+      "연령",
+      "만나이",
+      "나이(세)",
+      "연령(세)",
+      "만나이(세)"
+    ],
+    "성별": [
+      "성별",
+      "gender",
+      "sex",
+      "남녀",
+      "성별구분",
+      "남/여",
+      "여/남"
+    ],
+    "주민등록번호": [
+      "주민등록번호"
+    ],
+    "사원번호": [
+      "사원번호"
+    ],
+    "근로자주소": [
+      "근로자주소"
+    ],
+    "전화번호": [
+      "전화번호"
+    ],
+    "사업체명": [
+      "사업체명"
+    ],
+    "업종": [
+      "업종"
+    ],
+    "현작업부서": [
+      "현작업부서"
+    ],
+    "현작업내용": [
+      "현작업내용"
+    ],
+    "입사년월일": [
+      "입사년월일"
+    ],
+    "현직전입일": [
+      "현직전입일"
+    ]
+  },
+  "temporal": {
+    "전년도 검사결과": [
+      "전년도 검사결과",
+      "작년 결과",
+      "작년 검사",
+      "이전년도 결과",
+      "지난해 결과"
+    ],
+    "전전년도 검사결과": [
+      "전전년도 검사결과",
+      "재작년 결과", 
+      "2년전 결과",
+      "이전이전년도 결과"
+    ],
+    "이전결과": [
+      "이전결과",
+      "이전 결과",
+      "과거 결과",
+      "기존 결과",
+      "예전 결과",
+      "과거 검사결과"
+    ],
+    "현재결과": [
+      "현재결과",
+      "현재 결과",
+      "이번 결과",
+      "금회 결과",
+      "현재 검사결과"
+    ],
+    "추적검사": [
+      "추적검사",
+      "추적 검사",
+      "경과 관찰",
+      "재검사",
+      "후속 검사"
+    ]
+  },
+  "opinion": {
+    "일반소견": {
+      "patterns": [
+        "일반소견",
+        "종합소견", 
+        "검진소견",
+        "총평",
+        "종합의견"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        }
+      }
+    },
+    "의료소견": {
+      "patterns": [
+        "의사소견",
+        "의료진소견",
+        "전문의소견",
+        "의료소견",
+        "진료소견"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        }
+      }
+    },
+    "판정소견": {
+      "patterns": [
+        "판정소견",
+        "결과소견",
+        "최종소견",
+        "진단소견"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        },
+        "judgment": {
+          "priority": 2,
+          "data_type": "enum",
+          "enum_values": ["정상", "이상", "요관찰", "정밀검사 필요"],
+          "is_required": false
+        }
+      }
+    },
+    "사후관리소견": {
+      "patterns": [
+        "사후관리소견",
+        "추적관찰소견",
+        "경과관찰소견",
+        "사후지도사항"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        }
+      }
+    },
+    "치과소견": {
+      "patterns": [
+        "치과소견",
+        "구강검진소견",
+        "치과검진소견"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        }
+      }
+    },
+    "특수검진소견": {
+      "patterns": [
+        "특수검진소견",
+        "작업환경소견",
+        "직업성질환소견"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "text",
+          "is_required": true
+        }
+      }
+    }
+  },
   "basic": {
     "키": [
       "키",
       "key",
       "항목",
-      "구분",
-      "신장",
-      "키(cm)",
-      "신장(cm)",
-      "신장cm",
-      "키cm"
+      "구분"
     ],
-    "신장": [
-      "신장",
-      "키",
-      "height",
-      "신장(cm)",
-      "키(cm)",
-      "신장cm",
-      "키cm",
-      "신장/키",
-      "키/신장"
-    ],
+    "신장": {
+      "patterns": [
+        "신장",
+        "키",
+        "height",
+        "신장(cm)",
+        "키(cm)",
+        "신장cm",
+        "키cm",
+        "신장/키",
+        "키/신장"
+      ],
+      "expected_fields": {
+        "result": {
+          "priority": 1,
+          "data_type": "number",
+          "unit": "cm",
+          "validation_pattern": "^[0-9]{2,3}(\\.[0-9])?$",
+          "is_required": true
+        },
+        "normal_range": {
+          "priority": 2,
+          "data_type": "range",
+          "validation_pattern": "^[0-9]+-[0-9]+$",
+          "is_required": false
+        },
+        "judgment": {
+          "priority": 3,
+          "data_type": "enum",
+          "enum_values": ["정상", "이상", "요관찰"],
+          "is_required": false
+        },
+        "previous_year": {
+          "priority": 4,
+          "data_type": "number",
+          "unit": "cm",
+          "is_required": false
+        }
+      }
+    },
     "체중": [
       "체중",
       "몸무게",
@@ -32,16 +348,23 @@
       "몸무게kg",
       "체중/몸무게"
     ],
-    "혈압": [
-      "혈압",
-      "blood pressure",
-      "BP",
+    "수축기혈압": [
       "수축기",
-      "이완기",
       "수축기혈압",
+      "수축기 혈압",
+      "systolic",
+      "SBP",
+      "수축기(mmHg)",
+      "systolic BP"
+    ],
+    "이완기혈압": [
+      "이완기",
       "이완기혈압",
-      "수축기/이완기",
-      "혈압(mmHg)"
+      "이완기 혈압",
+      "diastolic",
+      "DBP",
+      "이완기(mmHg)",
+      "diastolic BP"
     ],
     "혈당": [
       "혈당",
@@ -64,6 +387,18 @@
       "LDL콜레스테롤",
       "총콜레스테롤(mg/dl)"
     ],
+    "혈청지오티(AST(GOT))": [
+      "혈청지오티(AST(GOT))",
+      "혈청지오티"
+    ],
+    "혈청지피티(ALT(GPT))": [
+      "혈청지피티(ALT(GPT))",
+      "혈청지피티"
+    ],
+    "감마지티피(γ-GTP)": [
+      "감마지티피(γ-GTP)",
+      "감마지티피"
+    ],
     "헤모글로빈": [
       "헤모글로빈",
       "hemoglobin",
@@ -72,6 +407,15 @@
       "HbA1c",
       "헤모글로빈(g/dl)",
       "혈색소(g/dl)"
+    ]
+  },
+  "special": {
+    "심전도": [
+      "심전도",
+      "ECG",
+      "EKG",
+      "심전도검사",
+      "심전도 소견"
     ],
     "백혈구": [
       "백혈구",
@@ -99,42 +443,6 @@
       "혈소판(/μL)",
       "혈소판수(/μL)",
       "PLT(/μL)"
-    ],
-    "성명": [
-      "성명",
-      "이름",
-      "name",
-      "환자명",
-      "환자이름",
-      "성함",
-      "이름/성명"
-    ],
-    "나이": [
-      "나이",
-      "age",
-      "연령",
-      "만나이",
-      "나이(세)",
-      "연령(세)",
-      "만나이(세)"
-    ],
-    "성별": [
-      "성별",
-      "gender",
-      "sex",
-      "남녀",
-      "성별구분",
-      "남/여",
-      "여/남"
-    ]
-  },
-  "special": {
-    "심전도": [
-      "심전도",
-      "ECG",
-      "EKG",
-      "심전도검사",
-      "심전도 소견"
     ],
     "흉부X선": [
       "흉부X선",
@@ -189,36 +497,6 @@
       "ENT exam",
       "청력검사",
       "이비인후과"
-    ],
-    "주민등록번호": [
-      "주민등록번호"
-    ],
-    "사원번호": [
-      "사원번호"
-    ],
-    "근로자주소": [
-      "근로자주소"
-    ],
-    "전화번호": [
-      "전화번호"
-    ],
-    "사업체명": [
-      "사업체명"
-    ],
-    "업종": [
-      "업종"
-    ],
-    "현작업부서": [
-      "현작업부서"
-    ],
-    "현작업내용": [
-      "현작업내용"
-    ],
-    "입사년월일": [
-      "입사년월일"
-    ],
-    "현직전입일": [
-      "현직전입일"
     ],
     "폭로기간": [
       "폭로기간"
@@ -292,12 +570,6 @@
     "정상치": [
       "정상치"
     ],
-    "전년도 검사결과": [
-      "전년도 검사결과"
-    ],
-    "전전년도 검사결과": [
-      "전전년도 검사결과"
-    ],
     "기본검사": [
       "기본검사"
     ],
@@ -347,18 +619,7 @@
     "호흡기계": [
       "호흡기계"
     ],
-    "혈청지오티(AST(GOT))": [
-      "혈청지오티(AST(GOT))",
-      "혈청지오티"
-    ],
-    "혈청지피티(ALT(GPT))": [
-      "혈청지피티(ALT(GPT))",
-      "혈청지피티"
-    ],
-    "감마지티피(γ-GTP)": [
-      "감마지티피(γ-GTP)",
-      "감마지티피"
-    ],
+    
     "비강인두계문진": [
       "비강인두계문진"
     ],
